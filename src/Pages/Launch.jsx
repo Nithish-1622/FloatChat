@@ -80,37 +80,98 @@ export const Launch = () => {
             {/* Top Section - Logos and Title */}
             <div className="flex-1 flex flex-col justify-center">
               
-              {/* Dual Logo Section - Bigger and Side by Side */}
+              {/* Dual Logo Section - Enhanced Visibility */}
               <motion.div
                 initial={{ scale: 0.8, opacity: 0, y: 30 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="mb-8"
               >
-                <div className="flex items-center justify-center gap-8 mb-4">
+                <div className="flex items-center justify-center gap-12 mb-4">
                   {/* FloatChat Logo */}
-                  <div className="relative">
-                    <img
-                      src={FloatChatLogo}
-                      alt="FloatChat Logo"
-                      className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-110 contrast-110 relative z-10"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 rounded-full blur-xl scale-150 animate-pulse"></div>
-                  </div>
+                  <motion.div 
+                    className="relative"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Enhanced Background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur-2xl scale-150 animate-pulse"></div>
+                    <div className="absolute inset-0 bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-cyan-500/30 shadow-2xl shadow-cyan-500/20"></div>
+                    
+                    {/* Logo Container */}
+                    <div className="relative p-6 rounded-2xl bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-cyan-400/20 backdrop-blur-sm">
+                      <img
+                        src={FloatChatLogo}
+                        alt="FloatChat Logo"
+                        className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 filter brightness-125 contrast-110 drop-shadow-2xl relative z-10"
+                      />
+                      
+                      {/* Glow Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-2xl animate-pulse"></div>
+                    </div>
+                    
+                    {/* Label */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.2 }}
+                      className="text-center mt-3"
+                    >
+                      <p className="text-sm text-cyan-300 font-poppins font-medium">FloatChat</p>
+                    </motion.div>
+                  </motion.div>
 
-                  {/* Separator */}
-                  <div className="w-0.5 h-16 md:h-20 bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent"></div>
+                  {/* Enhanced Separator */}
+                  <div className="flex flex-col items-center">
+                    <div className="w-0.5 h-20 md:h-24 bg-gradient-to-b from-transparent via-cyan-400/60 to-transparent"></div>
+                    <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent my-2"></div>
+                    <div className="w-0.5 h-20 md:h-24 bg-gradient-to-b from-transparent via-blue-400/60 to-transparent"></div>
+                  </div>
 
                   {/* SyntaxSquad Logo */}
-                  <div className="relative">
-                    <img
-                      src={SyntaxSquadLogo}
-                      alt="SyntaxSquad Logo"
-                      className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-110 contrast-110 relative z-10"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-xl scale-150 animate-pulse"></div>
-                  </div>
+                  <motion.div 
+                    className="relative"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Enhanced Background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-2xl scale-150 animate-pulse"></div>
+                    <div className="absolute inset-0 bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-blue-500/30 shadow-2xl shadow-blue-500/20"></div>
+                    
+                    {/* Logo Container */}
+                    <div className="relative p-6 rounded-2xl bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-blue-400/20 backdrop-blur-sm">
+                      <img
+                        src={SyntaxSquadLogo}
+                        alt="SyntaxSquad Logo"
+                        className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 filter brightness-125 contrast-110 drop-shadow-2xl relative z-10"
+                      />
+                      
+                      {/* Glow Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-2xl animate-pulse"></div>
+                    </div>
+                    
+                    {/* Label */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.6, duration:1 }}
+                      className="text-center mt-3"
+                    >
+                      <p className="text-sm text-blue-300 font-poppins font-medium">Syntax Squad</p>
+                    </motion.div>
+                  </motion.div>
                 </div>
+                
+                {/* Partnership Text */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.6, duration: 1 }}
+                  className="text-center mt-6"
+                >
+                 
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-slate-400/50 to-transparent mx-auto mt-2"></div>
+                </motion.div>
               </motion.div>
 
               {/* Brand Name - Crystal Clear */}

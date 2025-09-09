@@ -43,25 +43,67 @@ export const Launch = () => {
           transition={{ duration: 0.5 }}
           className="fixed inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center overflow-hidden"
         >
-          {/* Premium Background Pattern - Removed whitish backgrounds */}
+          {/* Enhanced Background Patterns */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.1)_0%,transparent_50%)]"></div>
             <div className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,rgba(6,182,212,0.1)_0deg,transparent_60deg,rgba(59,130,246,0.1)_120deg,transparent_180deg)]"></div>
           </div>
 
-          {/* Floating Particles */}
+          {/* Animated Geometric Shapes */}
           <div className="absolute inset-0 overflow-hidden">
-            {[...Array(15)].map((_, i) => (
+            {/* Large rotating circles */}
+            <motion.div
+              className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full border border-cyan-400/10"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full border border-blue-400/10"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            />
+            
+            {/* Floating hexagons */}
+            {[...Array(8)].map((_, i) => (
               <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+                key={`hex-${i}`}
+                className="absolute w-12 h-12 border border-cyan-300/20"
+                style={{
+                  clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
                 animate={{
-                  y: [-100, window.innerHeight + 100],
-                  x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-                  opacity: [0, 0.6, 0],
+                  y: [-20, 20, -20],
+                  rotate: [0, 180, 360],
+                  opacity: [0.2, 0.5, 0.2],
                 }}
                 transition={{
-                  duration: 6 + Math.random() * 3,
+                  duration: 4 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Enhanced Floating Particles with Multiple Types */}
+          <div className="absolute inset-0 overflow-hidden">
+            {/* Small particles */}
+            {[...Array(25)].map((_, i) => (
+              <motion.div
+                key={`particle-${i}`}
+                className="absolute w-1 h-1 bg-cyan-400/40 rounded-full"
+                animate={{
+                  y: [-100, window.innerHeight + 100],
+                  x: [
+                    Math.random() * window.innerWidth, 
+                    Math.random() * window.innerWidth
+                  ],
+                  opacity: [0, 0.8, 0],
+                }}
+                transition={{
+                  duration: 8 + Math.random() * 4,
                   repeat: Infinity,
                   delay: Math.random() * 5,
                   ease: "linear"
@@ -72,6 +114,147 @@ export const Launch = () => {
                 }}
               />
             ))}
+
+            {/* Medium bubbles */}
+            {[...Array(12)].map((_, i) => (
+              <motion.div
+                key={`bubble-${i}`}
+                className="absolute w-3 h-3 bg-blue-400/20 rounded-full border border-blue-400/30"
+                animate={{
+                  y: [window.innerHeight + 50, -100],
+                  x: [
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerWidth
+                  ],
+                  scale: [0.5, 1.2, 0.5],
+                  opacity: [0, 0.6, 0],
+                }}
+                transition={{
+                  duration: 10 + Math.random() * 5,
+                  repeat: Infinity,
+                  delay: Math.random() * 8,
+                  ease: "easeInOut"
+                }}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  bottom: '-50px',
+                }}
+              />
+            ))}
+
+            {/* Large orbs */}
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={`orb-${i}`}
+                className="absolute w-8 h-8 bg-gradient-to-br from-cyan-400/10 to-blue-400/10 rounded-full blur-sm"
+                animate={{
+                  x: [0, 100, -50, 0],
+                  y: [0, -80, 40, 0],
+                  scale: [1, 1.5, 0.8, 1],
+                  opacity: [0.3, 0.6, 0.2, 0.3],
+                }}
+                transition={{
+                  duration: 15 + Math.random() * 5,
+                  repeat: Infinity,
+                  delay: Math.random() * 10,
+                }}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Flowing Wave Animation */}
+          <div className="absolute inset-0 overflow-hidden opacity-30">
+            <motion.div
+              className="absolute w-full h-full"
+              animate={{
+                backgroundPosition: ['0% 0%', '100% 100%'],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              style={{
+                background: `
+                  radial-gradient(circle at 20% 80%, rgba(6,182,212,0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(59,130,246,0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(167,243,208,0.05) 0%, transparent 50%)
+                `,
+                backgroundSize: '200% 200%',
+              }}
+            />
+          </div>
+
+          {/* Pulsing Grid Lines */}
+          <div className="absolute inset-0 overflow-hidden opacity-10">
+            <motion.div
+              className="absolute inset-0"
+              animate={{
+                opacity: [0.05, 0.15, 0.05],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(6,182,212,0.5) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(6,182,212,0.5) 1px, transparent 1px)
+                `,
+                backgroundSize: '100px 100px',
+              }}
+            />
+          </div>
+
+          {/* Shooting Stars */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(4)].map((_, i) => (
+              <motion.div
+                key={`star-${i}`}
+                className="absolute w-1 h-20 bg-gradient-to-b from-cyan-400/80 via-cyan-400/40 to-transparent"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 50}%`,
+                  transform: 'rotate(45deg)',
+                }}
+                animate={{
+                  x: [-100, window.innerWidth + 100],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 3 + Math.random() * 2,
+                  ease: "easeOut"
+                }}
+              />
+            ))}
+          </div>
+
+          {/* DNA Helix Animation */}
+          <div className="absolute inset-0 overflow-hidden opacity-20">
+            <motion.div
+              className="absolute top-1/2 left-1/2 w-2 h-full origin-center"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              style={{ transform: 'translate(-50%, -50%)' }}
+            >
+              {[...Array(20)].map((_, i) => (
+                <div
+                  key={`dna-${i}`}
+                  className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+                  style={{
+                    left: Math.sin((i * Math.PI) / 10) * 150 + 'px',
+                    top: i * 30 + 'px',
+                  }}
+                />
+              ))}
+            </motion.div>
           </div>
 
           {/* Main Content Container */}
@@ -89,7 +272,18 @@ export const Launch = () => {
               >
                 <div className="flex items-center justify-center gap-8 mb-4">
                   {/* FloatChat Logo - Enhanced Visibility */}
-                  <div className="relative">
+                  <motion.div 
+                    className="relative"
+                    animate={{ 
+                      y: [0, -10, 0],
+                      boxShadow: [
+                        '0 0 20px rgba(6,182,212,0.3)',
+                        '0 0 40px rgba(6,182,212,0.5)',
+                        '0 0 20px rgba(6,182,212,0.3)'
+                      ]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
                     {/* Background container for better visibility */}
                     <div className="absolute inset-0 bg-black/15 backdrop-blur-sm rounded-2xl border border-white/20 shadow-2xl scale-110"></div>
                     <div className="relative bg-black/10 backdrop-blur-md rounded-2xl p-4 border border-cyan-300/30">
@@ -99,16 +293,45 @@ export const Launch = () => {
                         className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-150 contrast-125 saturate-110 drop-shadow-2xl relative z-10"
                       />
                     </div>
-                  </div>
+                  </motion.div>
 
-                  {/* Enhanced Separator */}
-                  <div className="relative">
+                  {/* Enhanced Separator with Animation */}
+                  <motion.div 
+                    className="relative"
+                    animate={{ 
+                      scaleY: [1, 1.2, 1],
+                      opacity: [0.7, 1, 0.7]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
                     <div className="w-0.5 h-16 md:h-20 bg-gradient-to-b from-transparent via-cyan-300/70 to-transparent"></div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-lg"></div>
-                  </div>
+                    <motion.div 
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-lg"
+                      animate={{ 
+                        scale: [1, 1.5, 1],
+                        boxShadow: [
+                          '0 0 10px rgba(6,182,212,0.5)',
+                          '0 0 20px rgba(6,182,212,0.8)',
+                          '0 0 10px rgba(6,182,212,0.5)'
+                        ]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                  </motion.div>
 
                   {/* SyntaxSquad Logo - Enhanced Visibility */}
-                  <div className="relative">
+                  <motion.div 
+                    className="relative"
+                    animate={{ 
+                      y: [0, -10, 0],
+                      boxShadow: [
+                        '0 0 20px rgba(147,51,234,0.3)',
+                        '0 0 40px rgba(147,51,234,0.5)',
+                        '0 0 20px rgba(147,51,234,0.3)'
+                      ]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+                  >
                     {/* Background container for better visibility */}
                     <div className="absolute inset-0 bg-black/15 backdrop-blur-sm rounded-2xl border border-white/20 shadow-2xl scale-110"></div>
                     <div className="relative bg-black/10 backdrop-blur-md rounded-2xl p-4 border border-purple-300/30">
@@ -118,30 +341,52 @@ export const Launch = () => {
                         className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-150 contrast-125 saturate-110 drop-shadow-2xl relative z-10"
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
 
-              {/* Brand Name - Crystal Clear */}
+              {/* Brand Name - Crystal Clear with Text Animation */}
               <motion.div
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
                 className="mb-6"
               >
-                <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold font-poppins tracking-tight">
+                <motion.h1 
+                  className="text-6xl md:text-7xl lg:text-8xl font-bold font-poppins tracking-tight"
+                  animate={{
+                    textShadow: [
+                      '0 0 20px rgba(6,182,212,0.3)',
+                      '0 0 40px rgba(6,182,212,0.6)',
+                      '0 0 20px rgba(6,182,212,0.3)'
+                    ]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                >
                   <span className="bg-gradient-to-r from-white via-cyan-100 to-blue-100 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(6,182,212,0.3)]">
                     FloatChat
                   </span>
-                </h1>
+                </motion.h1>
                 
-                {/* Elegant Underline */}
+                {/* Elegant Underline with Animation */}
                 <motion.div
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
-                  className="w-32 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 mx-auto mt-4 rounded-full"
-                />
+                  className="relative w-32 h-0.5 mx-auto mt-4 rounded-full overflow-hidden"
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400"
+                    animate={{
+                      x: ['-100%', '100%'],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                </motion.div>
               </motion.div>
 
               {/* Tagline */}
@@ -163,7 +408,7 @@ export const Launch = () => {
               </motion.div>
             </div>
 
-            {/* Bottom Section - Progress Bar */}
+            {/* Bottom Section - Enhanced Progress Bar */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -179,8 +424,18 @@ export const Launch = () => {
                     style={{ width: `${progress}%` }}
                     transition={{ duration: 0.1 }}
                   >
-                    {/* Shine Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"></div>
+                    {/* Enhanced Shine Effect */}
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-full"
+                      animate={{
+                        x: ['-100%', '200%'],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
                   </motion.div>
                 </div>
                 
@@ -188,14 +443,23 @@ export const Launch = () => {
                 <div className="flex justify-between items-center mt-3">
                   <motion.span 
                     className="text-sm text-slate-400 font-poppins"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    animate={{ 
+                      opacity: [0.5, 1, 0.5],
+                      color: ['rgb(148, 163, 184)', 'rgb(103, 232, 249)', 'rgb(148, 163, 184)']
+                    }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
                     Loading Experience
                   </motion.span>
-                  <span className="text-sm text-cyan-400 font-poppins font-medium">
+                  <motion.span 
+                    className="text-sm text-cyan-400 font-poppins font-medium"
+                    animate={{ 
+                      scale: progress > 50 ? [1, 1.1, 1] : 1
+                    }}
+                    transition={{ duration: 0.5 }}
+                  >
                     {progress}%
-                  </span>
+                  </motion.span>
                 </div>
               </div>
 
@@ -208,11 +472,30 @@ export const Launch = () => {
             </motion.div>
           </div>
 
-          {/* Elegant Corner Accents */}
-          <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-cyan-500/30 rounded-tl-lg"></div>
-          <div className="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-cyan-500/30 rounded-tr-lg"></div>
-          <div className="absolute bottom-8 left-8 w-16 h-16 border-l-2 border-b-2 border-cyan-500/30 rounded-bl-lg"></div>
-          <div className="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-cyan-500/30 rounded-br-lg"></div>
+          {/* Enhanced Corner Accents with Animation */}
+          {[
+            { position: 'top-8 left-8', rotation: 0 },
+            { position: 'top-8 right-8', rotation: 90 },
+            { position: 'bottom-8 left-8', rotation: 270 },
+            { position: 'bottom-8 right-8', rotation: 180 }
+          ].map((corner, index) => (
+            <motion.div
+              key={index}
+              className={`absolute ${corner.position} w-16 h-16`}
+              style={{ rotate: corner.rotation }}
+              animate={{
+                opacity: [0.3, 0.8, 0.3],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: index * 0.5,
+              }}
+            >
+              <div className="w-full h-full border-l-2 border-t-2 border-cyan-500/30 rounded-tl-lg" />
+            </motion.div>
+          ))}
         </motion.div>
       )}
     </AnimatePresence>

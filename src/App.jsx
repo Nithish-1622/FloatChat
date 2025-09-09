@@ -3,7 +3,7 @@ import './App.css'
 import { AllRoutes } from './Routes/AllRoutes.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+  //const [count, setCount] = useState(0)
 
   return (
     <>

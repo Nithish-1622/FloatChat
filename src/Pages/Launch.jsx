@@ -80,7 +80,7 @@ export const Launch = () => {
             {/* Top Section - Logos and Title */}
             <div className="flex-1 flex flex-col justify-center">
               
-              {/* Dual Logo Section - Bigger and Side by Side */}
+              {/* Dual Logo Section - Enhanced Visibility */}
               <motion.div
                 initial={{ scale: 0.8, opacity: 0, y: 30 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -88,27 +88,36 @@ export const Launch = () => {
                 className="mb-8"
               >
                 <div className="flex items-center justify-center gap-8 mb-4">
-                  {/* FloatChat Logo */}
+                  {/* FloatChat Logo - Enhanced Visibility */}
                   <div className="relative">
-                    <img
-                      src={FloatChatLogo}
-                      alt="FloatChat Logo"
-                      className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-110 contrast-110 relative z-10"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 rounded-full blur-xl scale-150 animate-pulse"></div>
+                    {/* Background container for better visibility */}
+                    <div className="absolute inset-0 bg-black/15 backdrop-blur-sm rounded-2xl border border-white/20 shadow-2xl scale-110"></div>
+                    <div className="relative bg-black/10 backdrop-blur-md rounded-2xl p-4 border border-cyan-300/30">
+                      <img
+                        src={FloatChatLogo}
+                        alt="FloatChat Logo"
+                        className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-150 contrast-125 saturate-110 drop-shadow-2xl relative z-10"
+                      />
+                    </div>
                   </div>
 
-                  {/* Separator */}
-                  <div className="w-0.5 h-16 md:h-20 bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent"></div>
-
-                  {/* SyntaxSquad Logo */}
+                  {/* Enhanced Separator */}
                   <div className="relative">
-                    <img
-                      src={SyntaxSquadLogo}
-                      alt="SyntaxSquad Logo"
-                      className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-110 contrast-110 relative z-10"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-xl scale-150 animate-pulse"></div>
+                    <div className="w-0.5 h-16 md:h-20 bg-gradient-to-b from-transparent via-cyan-300/70 to-transparent"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-lg"></div>
+                  </div>
+
+                  {/* SyntaxSquad Logo - Enhanced Visibility */}
+                  <div className="relative">
+                    {/* Background container for better visibility */}
+                    <div className="absolute inset-0 bg-black/15 backdrop-blur-sm rounded-2xl border border-white/20 shadow-2xl scale-110"></div>
+                    <div className="relative bg-black/10 backdrop-blur-md rounded-2xl p-4 border border-purple-300/30">
+                      <img
+                        src={SyntaxSquadLogo}
+                        alt="SyntaxSquad Logo"
+                        className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-150 contrast-125 saturate-110 drop-shadow-2xl relative z-10"
+                      />
+                    </div>
                   </div>
                 </div>
               </motion.div>

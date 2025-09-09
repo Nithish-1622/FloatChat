@@ -30,7 +30,7 @@ export const Dashboard = () => {
         <div className="absolute top-0 left-0 w-full h-[85vh] flex flex-col items-center justify-center z-10 px-4">
           <div className="space-y-8 text-center max-w-4xl">
             {/* Logo and Title */}
-            <div className="flex items-center justify-center space-x-4 animate-fade-in">
+            <div className="flex items-center justify-center space-x-4 ">
               <FaRobot className="text-4xl text-cyan-400" />
               <h1 className="text-white text-5xl md:text-6xl font-bold font-Poppins tracking-tight">
                 Float Chat

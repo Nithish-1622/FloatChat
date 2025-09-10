@@ -1,359 +1,984 @@
 import React, { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import water from '../Assets/water.mp4'
 import { useNavigate } from 'react-router-dom'
-import { 
-  FaRobot, 
-  FaArrowRight, 
-  FaWater, 
-  FaFish, 
-  FaLeaf, 
-  FaChartLine, 
-  FaGlobe, 
-  FaDatabase,
-  FaSearch,
-  FaBell,
-  FaUser,
-  FaCog,
-  FaBookmark,
-  FaClock,
-  FaEye,
-  FaUsers
-} from 'react-icons/fa'
-
+import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch, FaCubes, FaMap, FaBell, FaInfoCircle, FaHome, FaUsers, FaHeart, FaGlobe, FaLightbulb, FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa'
+import img1 from '../assets/FloatChat.png'
+import navigationImg from '../assets/Navigatiion.jpg'
+import livelihoodImg from '../assets/Livelihood.jpg'
+import researchImg from '../assets/Research.jpg'
 export const Dashboard = () => {
   const navigate = useNavigate();
-  const [stats, setStats] = useState({
-    users: 0,
-    dataPoints: 0,
-    queries: 0,
-    accuracy: 0
-  });
-
-  // Animated counter effect
-  useEffect(() => {
-    const targetStats = {
-      users: 15420,
-      dataPoints: 2847365,
-      queries: 98750,
-      accuracy: 97.8
-    };
-
-    const animateCount = (key, target) => {
-      const increment = target / 100;
-      let current = 0;
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          current = target;
-          clearInterval(timer);
-        }
-        setStats(prev => ({
-          ...prev,
-          [key]: Math.floor(current)
-        }));
-      }, 20);
-    };
-
-    // Start animations after component mounts
-    setTimeout(() => {
-      Object.entries(targetStats).forEach(([key, value]) => {
-        animateCount(key, value);
-      });
-    }, 500);
-  }, []);
+  const [scrolled, setScrolled] = useState(false);
+  const [showModulesDropdown, setShowModulesDropdown] = useState(false);
 
   const handleAsk = () => {
     navigate('/chatbot');
   }
 
+  const handleModuleNavigation = (moduleId) => {
+    const element = document.getElementById(moduleId);
+    if (element) {
+      const offsetTop = element.offsetTop - 100; // Account for fixed navbar
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+    setShowModulesDropdown(false); // Close dropdown after navigation
+  }
+
+  const handleNavigation = (href) => {
+    if (href === '#about') {
+      const element = document.getElementById('about');
+      if (element) {
+        const offsetTop = element.offsetTop - 100; // Account for fixed navbar
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      // Handle other navigation items if needed
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showModulesDropdown && !event.target.closest('.modules-dropdown')) {
+        setShowModulesDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showModulesDropdown]);
+
+  const navItems = [
+    { name: 'Home', href: '#home', icon: FaHome },
+    { name: 'Modules', href: '#modules', icon: FaCubes },
+    { name: 'Map', href: '#map', icon: FaMap },
+    { name: 'Notification', href: '#notification', icon: FaBell },
+    { name: 'About Us', href: '#about', icon: FaInfoCircle },
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-900">
-      {/* Professional Navigation Bar - Fixed Height */}
-      <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-          <div className="flex justify-between items-center h-full">
-            {/* Logo Section */}
-            <div className="flex items-center space-x-3">
-              <FaWater className="text-2xl text-cyan-400" />
-              <span className="text-xl font-bold text-white font-poppins">FloatChat</span>
-            </div>
+    <>
 
-            {/* Navigation Links */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#home" className="text-slate-300 hover:text-cyan-400 transition-colors font-poppins">Home</a>
-              <a href="#features" className="text-slate-300 hover:text-cyan-400 transition-colors font-poppins">Features</a>
-              <a href="#about" className="text-slate-300 hover:text-cyan-400 transition-colors font-poppins">About</a>
-              <a href="#contact" className="text-slate-300 hover:text-cyan-400 transition-colors font-poppins">Contact</a>
-            </div>
+    <div className="no-scrollbar">
 
-            {/* Right Section */}
-            <div className="flex items-center space-x-4">
-              <FaSearch className="text-slate-300 hover:text-cyan-400 cursor-pointer transition-colors" />
-              <FaBell className="text-slate-300 hover:text-cyan-400 cursor-pointer transition-colors" />
-              <FaUser className="text-slate-300 hover:text-cyan-400 cursor-pointer transition-colors" />
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content - Starts after navbar */}
-      <main className="pt-10">
-        {/* Hero Section */}
-        <section className="relative w-full h-screen">
-          {/* Video Background */}
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay
-            loop
-            muted
-          >
-            <source src={water} type="video/mp4" />
-          </video>
-
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>
-
-          {/* Content */}
-          <div className="relative z-10 h-full flex items-center justify-center px-4">
-            <div className="text-center max-w-5xl space-y-8">
-              {/* Logo and Title */}
-              <div className="flex items-center justify-center space-x-4 mb-6">
-                <div className="p-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full">
-                  <FaRobot className="text-3xl text-white" />
-                </div>
-                <h1 className="text-6xl md:text-7xl font-bold font-poppins tracking-tight bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-                  Float Chat
-                </h1>
-              </div>
-
-              {/* Description */}
-              <div className="space-y-4">
-                <p className="text-slate-200 text-2xl md:text-3xl font-light max-w-3xl mx-auto leading-relaxed">
-                  Dive into the future of ocean exploration
-                </p>
-                <p className="text-cyan-300 text-lg md:text-xl font-medium max-w-2xl mx-auto">
-                  Powered by advanced AI algorithms for real-time ocean data insights
-                </p>
-              </div>
-
-              {/* Statistics Row */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto py-4">
-                <StatCard number={stats.users.toLocaleString()} label="Active Users" icon={FaUsers} />
-                <StatCard number={stats.dataPoints.toLocaleString()} label="Data Points" icon={FaDatabase} />
-                <StatCard number={stats.queries.toLocaleString()} label="Queries Answered" icon={FaChartLine} />
-                <StatCard number={`${stats.accuracy}%`} label="Accuracy Rate" icon={FaEye} />
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
-                <button 
-                  onClick={handleAsk}
-                  className="group relative inline-flex items-center justify-center px-10 py-4 font-poppins text-xl font-semibold text-white bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/30"
+      {/* Enhanced Navigation Bar with Fixed Position and Blur Effect */}
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled 
+            ? 'bg-slate-900/20 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/5' 
+            : 'bg-slate-900/10 backdrop-blur-sm'
+        }`}
+        style={{
+          backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'blur(10px)',
+          WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'blur(10px)',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+          <div className="flex items-center justify-between h-16 lg:h-20">
+            
+            {/* Enhanced Logo Section */}
+            <motion.div 
+              className="flex items-center space-x-3 cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <div className="relative">
+                {/* Main Logo Icon */}
+                <motion.div
+                  className="relative z-10"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
                 >
-                  <span className="relative z-10">Start Exploring</span>
-                  <FaArrowRight className="ml-3 group-hover:translate-x-1 transition-transform relative z-10" />
-                </button>
-              
+                 
+                </motion.div>
+                
+                <img src={img1} alt="Logo" className="w-8 h-8 lg:w-10 lg:h-10 bg-amber-50 " />
+                {/* Pulsing Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 text-2xl lg:text-3xl text-cyan-400"
+                  animate={{
+                    opacity: [0, 0.3, 0],
+                    scale: [1, 1.3, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  
+                </motion.div>
+                
+                {/* Background Glow */}
+                <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-md transform scale-150 opacity-50"></div>
               </div>
-            </div>
-          </div>
-        </section>
+              
+              <div className="flex flex-col">
+                <h1 className="text-white text-xl lg:text-2xl font-bold font-poppins tracking-tight drop-shadow-lg">
+                  FloatChat
+                </h1>
+                <motion.div
+                  className="h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                />
+              </div>
+            </motion.div>
 
-        {/* Wave Separator */}
-        <div className="relative w-full bg-slate-900">
-          <svg
-            className="w-full h-24"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="waveSeparator" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#0f172a" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#0f172a" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#0f172a" stopOpacity="1" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0,60L48,65C96,70,192,80,288,75C384,70,480,50,576,45C672,40,768,50,864,60C960,70,1056,80,1152,75L1200,70L1200,120L1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
-              fill="url(#waveSeparator)"
-            />
-          </svg>
-          
-          
-          {/* Animated Wave Overlay */}
-          <svg
-            className="absolute top-0 w-full h-24 opacity-60"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0,40L48,50C96,60,192,80,288,85C384,90,480,80,576,70C672,60,768,50,864,55C960,60,1056,80,1152,85L1200,90L1200,120L1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
-              fill="rgba(6, 182, 212, 0.1)"
-              className="animate-pulse"
-            />
-          </svg>
+            {/* Navigation Menu */}
+            <ul className="flex items-center space-x-1">
+              {navItems.map((item, index) => (
+                <motion.li
+                  key={item.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative"
+                >
+                  {item.name === 'Modules' ? (
+                    // Modules Dropdown
+                    <div className="relative modules-dropdown">
+                      <motion.button
+                        onClick={() => setShowModulesDropdown(!showModulesDropdown)}
+                        className={`group relative flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 font-poppins text-sm font-medium ${
+                          scrolled 
+                            ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                            : 'text-slate-200 hover:text-white hover:bg-white/5'
+                        }`}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                      >
+                        {/* Icon with Animation */}
+                        <motion.div
+                          whileHover={{ rotate: 360, scale: 1.2 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <item.icon className="text-sm group-hover:text-cyan-400 transition-colors duration-300" />
+                        </motion.div>
+                        
+                        <span className="relative z-10">{item.name}</span>
+                        
+                        {/* Dropdown Arrow */}
+                        <motion.div
+                          animate={{ rotate: showModulesDropdown ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </motion.div>
+                        
+                        {/* Enhanced Hover Effect */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        />
+                      </motion.button>
+
+                      {/* Dropdown Menu */}
+                      {showModulesDropdown && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          className="absolute top-full mt-2 left-0 w-56 bg-slate-800/95 backdrop-blur-md rounded-xl shadow-xl border border-slate-700/50 overflow-hidden z-50"
+                        >
+                          <div className="py-2">
+                            <button
+                              onClick={() => handleModuleNavigation('marine-navigation')}
+                              className="w-full flex items-center space-x-3 px-4 py-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors duration-200"
+                            >
+                              <FaAnchor className="text-cyan-400" />
+                              <span>Marine Navigation</span>
+                            </button>
+                            <button
+                              onClick={() => handleModuleNavigation('coastal-livelihood')}
+                              className="w-full flex items-center space-x-3 px-4 py-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors duration-200"
+                            >
+                              <FaFish className="text-blue-400" />
+                              <span>Coastal Livelihood</span>
+                            </button>
+                            <button
+                              onClick={() => handleModuleNavigation('research')}
+                              className="w-full flex items-center space-x-3 px-4 py-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors duration-200"
+                            >
+                              <FaSearch className="text-purple-400" />
+                              <span>Marine Research</span>
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </div>
+                  ) : item.name === 'Home' ? (
+                    // Home Button - Special scroll to top behavior
+                    <motion.button
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                      className={`group relative flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 font-poppins text-sm font-medium ${
+                        scrolled 
+                          ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                          : 'text-slate-200 hover:text-white hover:bg-white/5'
+                      }`}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                      {/* Icon with Animation */}
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.2 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <item.icon className="text-sm group-hover:text-cyan-400 transition-colors duration-300" />
+                      </motion.div>
+                      
+                      <span className="relative z-10">{item.name}</span>
+                      
+                      {/* Enhanced Hover Effect */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                      
+                      {/* Bottom Indicator */}
+                      <motion.div
+                        className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"
+                      />
+                    </motion.button>
+                  ) : (
+                    // Regular Navigation Items
+                    <motion.button
+                      onClick={() => handleNavigation(item.href)}
+                      className={`group relative flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 font-poppins text-sm font-medium ${
+                        scrolled 
+                          ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                          : 'text-slate-200 hover:text-white hover:bg-white/5'
+                      }`}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                      {/* Icon with Animation */}
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.2 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <item.icon className="text-sm group-hover:text-cyan-400 transition-colors duration-300" />
+                      </motion.div>
+                      
+                      <span className="relative z-10">{item.name}</span>
+                      
+                      {/* Enhanced Hover Effect */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                      
+                      {/* Bottom Indicator */}
+                      <motion.div
+                        className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"
+                      />
+                    </motion.button>
+                  )}
+                </motion.li>
+              ))}
+            </ul>
+
+            {/* Enhanced CTA Button */}
+            <motion.button
+              onClick={handleAsk}
+              className={`relative inline-flex items-center justify-center px-6 py-2.5 font-poppins text-sm font-medium text-white rounded-full overflow-hidden shadow-lg transition-all duration-300 group ${
+                scrolled 
+                  ? 'bg-gradient-to-r from-cyan-500/90 to-blue-500/90 hover:from-cyan-400 hover:to-blue-400 shadow-cyan-500/20' 
+                  : 'bg-gradient-to-r from-cyan-500/80 to-blue-500/80 hover:from-cyan-500 hover:to-blue-500'
+              }`}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: '0 10px 25px rgba(6,182,212,0.3)'
+              }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              {/* Button Background Animation */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+              
+              {/* Button Content */}
+              <span className="relative z-10 font-medium">Explore Now</span>
+              <motion.div
+                className="relative z-10 ml-2"
+                animate={{ x: [0, 3, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <FaArrowRight className="text-xs" />
+              </motion.div>
+              
+              {/* Shine Effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 opacity-0 group-hover:opacity-100"
+                animate={{
+                  x: ['-100%', '100%'],
+                }}
+                transition={{
+                  duration: 0.6,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                }}
+              />
+            </motion.button>
+          </div>
         </div>
-       
-        {/* Quick Actions Section */}
-        <section className="w-full py-20 px-4 bg-slate-900">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-white mb-4 font-poppins">Quick Actions</h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mb-4"></div>
-              <p className="text-xl text-slate-400 max-w-2xl mx-auto">Access powerful tools for ocean data analysis</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <QuickActionCard 
-                icon={FaSearch} 
-                title="Search Data" 
-                description="Find specific ocean data with advanced filters"
-                color="cyan"
+      </motion.nav>
+
+      {/* Hero Section */}
+      <div className="relative w-full min-h-screen bg-slate-900">
+        {/* Video Background */}
+        <video
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+        >
+          <source src={water} type="video/mp4" />
+        </video>
+
+        {/* Enhanced Gradient Overlay */}
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>
+        
+        {/* Additional Overlay for Better Text Readability */}
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-slate-900/40 via-transparent to-slate-900/40"></div>
+
+        {/* Content Section */}
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center z-10 px-2">
+          <motion.div 
+            className="space-y-8 text-center max-w-4xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            {/* Main Title */}
+            <motion.div 
+              className="space-y-4"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
+              <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold font-poppins tracking-tight leading-tight">
+                <motion.span
+                  className="block"
+                  animate={{
+                    textShadow: [
+                      '0 0 20px rgba(6,182,212,0.3)',
+                      '0 0 40px rgba(6,182,212,0.5)',
+                      '0 0 20px rgba(6,182,212,0.3)'
+                    ]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                >
+                  Dive Into the Wonders
+                </motion.span>
+                <motion.span 
+                  className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 1 }}
+                >
+                  of the Ocean
+                </motion.span>
+              </h1>
+            </motion.div>
+
+            {/* Description */}
+            <motion.p 
+              className="text-slate-300 text-lg md:text-xl lg:text-2xl font-light max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
+              Explore vibrant ecosystems, uncover the mysteries of ocean life, and connect 
+              with a community passionate about preserving our blue planet
+            </motion.p>
+
+            {/* CTA Button */}
+            <motion.div 
+              className="pt-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.1 }}
+            >
+              <motion.button 
+                onClick={handleAsk}
+                className="group relative inline-flex items-center justify-center px-10 py-4 font-poppins text-lg font-medium text-white bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full overflow-hidden shadow-2xl transition-all duration-300"
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: '0 25px 50px rgba(6,182,212,0.25)'
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+                <span className="relative z-10">Start Exploring</span>
+                <motion.div
+                  className="relative z-10 ml-3"
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <FaArrowRight />
+                </motion.div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.5 }}
+        >
+          <motion.div
+            className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <motion.div
+              className="w-1 h-3 bg-white rounded-full mt-2"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+
+     {/* Modules Section */}
+      <div className='w-full bg-gradient-to-b from-slate-900 to-slate-800 px-2 py-20'>
+        
+        {/* Section Header */}
+        <div className="max-w-6xl mx-auto text-center mb-16">
+          <h2 className="text-5xl font-bold text-white mb-6">Ocean Intelligence Modules</h2>
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+            Comprehensive AI-powered solutions for marine navigation, coastal development, and ocean research
+          </p>
+        </div>
+
+        {/* Marine Navigation Module - Background Image Design */}
+        <section id="marine-navigation" className="mb-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative rounded-3xl overflow-hidden min-h-[600px] flex items-center shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] hover:shadow-[0_35px_60px_-12px_rgba(6,182,212,0.4)] transition-all duration-500"
+              style={{
+                filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
+              }}
+            >
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${navigationImg})` }}
               />
-              <QuickActionCard 
-                icon={FaBookmark} 
-                title="Saved Queries" 
-                description="Access your bookmarked searches"
-                color="blue"
-              />
-              <QuickActionCard 
-                icon={FaClock} 
-                title="Recent Activity" 
-                description="View your exploration history"
-                color="purple"
-              />
-              <QuickActionCard 
-                icon={FaCog} 
-                title="Settings" 
-                description="Customize your dashboard experience"
-                color="green"
-              />
-            </div>
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
+              
+              {/* Content */}
+              <div className="relative z-10 w-full max-w-2xl p-12 lg:p-16">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <div 
+                    className="inline-flex items-center justify-center w-20 h-20 bg-cyan-500/20 backdrop-blur-md rounded-2xl mb-8 border border-cyan-400/30"
+                    style={{
+                      boxShadow: '0 10px 25px -5px rgba(6, 182, 212, 0.3), 0 4px 15px -3px rgba(0, 0, 0, 0.2)',
+                      filter: 'drop-shadow(0 4px 8px rgba(6, 182, 212, 0.2))',
+                    }}
+                  >
+                    <FaAnchor className="text-3xl text-cyan-400" />
+                  </div>
+                  
+                  <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    Marine
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
+                      Navigation
+                    </span>
+                  </h2>
+                  
+                  <p className="text-xl text-slate-200 mb-10 leading-relaxed max-w-lg">
+                    AI-powered maritime intelligence for smart navigation, weather integration, and real-time sea route optimization.
+                  </p>
+                  
+                  <motion.button
+                    onClick={() => handleModuleNavigation('marine-navigation')}
+                    className="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg rounded-2xl transition-all duration-300 overflow-hidden"
+                    style={{
+                      boxShadow: '0 20px 40px -12px rgba(6, 182, 212, 0.4), 0 8px 25px -8px rgba(0, 0, 0, 0.3)',
+                      filter: 'drop-shadow(0 8px 16px rgba(6, 182, 212, 0.3))',
+                    }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                      boxShadow: '0 25px 50px -12px rgba(6, 182, 212, 0.6), 0 12px 30px -8px rgba(0, 0, 0, 0.4)',
+                      filter: 'drop-shadow(0 12px 24px rgba(6, 182, 212, 0.5))',
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span className="relative z-10 flex items-center">
+                      Explore Navigation
+                      <FaArrowRight className="ml-4 group-hover:translate-x-2 transition-transform duration-300" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.button>
+                </motion.div>
+              </div>
+            
+            </motion.div>
           </div>
         </section>
 
-   
+        {/* Coastal Livelihood Module - Background Design */}
+        <section id="coastal-livelihood" className="mb-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative rounded-3xl overflow-hidden min-h-[600px] flex items-center shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] hover:shadow-[0_35px_60px_-12px_rgba(59,130,246,0.4)] transition-all duration-500"
+              style={{
+                filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
+              }}
+            >
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${livelihoodImg})` }}
+              />
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/30 via-slate-900/55 to-slate-900/70" />
+              
+              {/* Content positioned on the right */}
+              <div className="relative z-10 w-full max-w-2xl ml-auto p-12 lg:p-16">
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <div 
+                    className="inline-flex items-center justify-center w-20 h-20 bg-blue-500/20 backdrop-blur-md rounded-2xl mb-8 border border-blue-400/30"
+                    style={{
+                      boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.3), 0 4px 15px -3px rgba(0, 0, 0, 0.2)',
+                      filter: 'drop-shadow(0 4px 8px rgba(59, 130, 246, 0.2))',
+                    }}
+                  >
+                    <FaFish className="text-3xl text-blue-400" />
+                  </div>
+                  
+                  <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    Coastal
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                      Livelihood
+                    </span>
+                  </h2>
+                  
+                  <p className="text-xl text-slate-200 mb-10 leading-relaxed max-w-lg">
+                    Sustainable development solutions for coastal communities. Smart aquaculture, eco-tourism, and resource management.
+                  </p>
+                  
+                  <motion.button
+                    onClick={() => handleModuleNavigation('coastal-livelihood')}
+                    className="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg rounded-2xl transition-all duration-300 overflow-hidden"
+                    style={{
+                      boxShadow: '0 20px 40px -12px rgba(59, 130, 246, 0.4), 0 8px 25px -8px rgba(0, 0, 0, 0.3)',
+                      filter: 'drop-shadow(0 8px 16px rgba(59, 130, 246, 0.3))',
+                    }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                      boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.6), 0 12px 30px -8px rgba(0, 0, 0, 0.4)',
+                      filter: 'drop-shadow(0 12px 24px rgba(59, 130, 246, 0.5))',
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span className="relative z-10 flex items-center">
+                      Explore Livelihood
+                      <FaArrowRight className="ml-4 group-hover:translate-x-2 transition-transform duration-300" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.button>
+                </motion.div>
+              </div>
+              
+        
+            </motion.div>
+          </div>
+        </section>
 
-        {/* Features Section */}
-        <section className='w-full py-20 px-4 bg-gradient-to-b from-slate-800 to-slate-900' id="features">
+        {/* Marine Research Module - Background Image Design */}
+        <section id="research" className="mb-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative rounded-3xl overflow-hidden min-h-[600px] flex items-center shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] hover:shadow-[0_35px_60px_-12px_rgba(147,51,234,0.4)] transition-all duration-500"
+              style={{
+                filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
+              }}
+            >
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${researchImg})` }}
+              />
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-900/50 to-slate-900/40" />
+              
+              {/* Content */}
+              <div className="relative z-10 w-full max-w-2xl p-12 lg:p-16">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <div 
+                    className="inline-flex items-center justify-center w-20 h-20 bg-purple-500/20 backdrop-blur-md rounded-2xl mb-8 border border-purple-400/30"
+                    style={{
+                      boxShadow: '0 10px 25px -5px rgba(147, 51, 234, 0.3), 0 4px 15px -3px rgba(0, 0, 0, 0.2)',
+                      filter: 'drop-shadow(0 4px 8px rgba(147, 51, 234, 0.2))',
+                    }}
+                  >
+                    <FaSearch className="text-3xl text-purple-400" />
+                  </div>
+                  
+                  <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    Marine
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
+                      Research
+                    </span>
+                  </h2>
+                  
+                  <p className="text-xl text-slate-200 mb-10 leading-relaxed max-w-lg">
+                    Advanced oceanographic research with AI-powered analytics. Climate monitoring, biodiversity tracking, and scientific discovery.
+                  </p>
+                  
+                  <motion.button
+                    onClick={() => handleModuleNavigation('research')}
+                    className="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold text-lg rounded-2xl transition-all duration-300 overflow-hidden"
+                    style={{
+                      boxShadow: '0 20px 40px -12px rgba(147, 51, 234, 0.4), 0 8px 25px -8px rgba(0, 0, 0, 0.3)',
+                      filter: 'drop-shadow(0 8px 16px rgba(147, 51, 234, 0.3))',
+                    }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                      boxShadow: '0 25px 50px -12px rgba(147, 51, 234, 0.6), 0 12px 30px -8px rgba(0, 0, 0, 0.4)',
+                      filter: 'drop-shadow(0 12px 24px rgba(147, 51, 234, 0.5))',
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span className="relative z-10 flex items-center">
+                      Explore Research
+                      <FaArrowRight className="ml-4 group-hover:translate-x-2 transition-transform duration-300" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.button>
+                </motion.div>
+              </div>
+              
+            </motion.div>
+          </div>
+        </section>
+
+        {/* All Modules Overview */}
+        <section id="modules" className="mb-20">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-white mb-4 font-poppins">Powerful Features</h2>
-              <div className="w-32 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 mx-auto mb-4"></div>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto font-poppins leading-relaxed">
-                Explore our comprehensive suite of ocean data analysis tools designed for professionals
+            <div className="text-center mb-12">
+              <FaWater className="text-5xl text-teal-400 mx-auto mb-4" />
+              <h2 className="text-4xl font-bold text-white mb-4">Complete Ocean Intelligence Suite</h2>
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+                Integrated solutions for comprehensive ocean management and exploration
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <FeatureCard 
-                icon={FaDatabase}
-                title="Ocean Data Analytics"
-                description="Access real-time ocean data and insights powered by advanced AI algorithms with comprehensive reporting tools"
-                gradient="from-cyan-500 to-blue-500"
+            <div className="grid md:grid-cols-3 gap-8">
+              <QuickAccessCard 
+                icon={<FaAnchor />}
+                title="Marine Navigation"
+                description="Smart navigation for all maritime sectors"
+                color="cyan"
+                onClick={() => handleModuleNavigation('marine-navigation')}
               />
-              <FeatureCard 
-                icon={FaFish}
-                title="Marine Life Intelligence"
-                description="Learn about diverse marine species and their ecosystems with detailed biological and behavioral information"
-                gradient="from-blue-500 to-purple-500"
+              <QuickAccessCard 
+                icon={<FaFish />}
+                title="Coastal Livelihood"
+                description="Sustainable coastal development"
+                color="blue"
+                onClick={() => handleModuleNavigation('coastal-livelihood')}
               />
-              <FeatureCard 
-                icon={FaLeaf}
-                title="Conservation Tools"
-                description="Discover how to contribute to ocean conservation efforts and sustainability with actionable insights"
-                gradient="from-green-500 to-teal-500"
-              />
-              <FeatureCard 
-                icon={FaChartLine}
-                title="Advanced Analytics"
-                description="Powerful analytics tools for data visualization, trend analysis, and predictive modeling capabilities"
-                gradient="from-purple-500 to-pink-500"
-              />
-              <FeatureCard 
-                icon={FaGlobe}
-                title="Global Coverage"
-                description="Worldwide ocean monitoring with satellite data integration and comprehensive sensor networks"
-                gradient="from-orange-500 to-red-500"
-              />
-              <FeatureCard 
-                icon={FaRobot}
-                title="AI Assistant"
-                description="Intelligent chatbot powered by machine learning for instant answers and personalized recommendations"
-                gradient="from-indigo-500 to-cyan-500"
+              <QuickAccessCard 
+                icon={<FaSearch />}
+                title="Marine Research"
+                description="Advanced ocean analytics"
+                color="purple"
+                onClick={() => handleModuleNavigation('research')}
               />
             </div>
           </div>
         </section>
+      </div>
 
-        {/* Technology Section */}
-        <section className="w-full py-16 px-4 bg-slate-900">
-          <div className="max-w-6xl mx-auto text-center">
-            <h3 className="text-3xl font-bold text-white mb-8 font-poppins">Built with Cutting-Edge Technology</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <TechCard title="AI/ML" description="Advanced algorithms" />
-              <TechCard title="Real-time" description="Live data streams" />
-              <TechCard title="Cloud" description="Scalable infrastructure" />
-              <TechCard title="Security" description="Enterprise-grade" />
+      {/* About Us Section */}
+      <section id="about" className="w-full bg-gradient-to-b from-slate-800 to-slate-900 py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Section Header */}
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-cyan-500/20 backdrop-blur-md rounded-2xl mb-6 border border-cyan-400/30">
+              <FaInfoCircle className="text-2xl text-cyan-400" />
             </div>
+            <h2 className="text-5xl font-bold text-white mb-6">About FloatChat</h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              Pioneering the future of ocean intelligence through innovative AI solutions
+            </p>
+          </motion.div>
+
+          {/* Content Grid */}
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h3 className="text-3xl font-bold text-white mb-6">Our Mission</h3>
+              <p className="text-lg text-slate-300 mb-6 leading-relaxed">
+                FloatChat is dedicated to revolutionizing marine intelligence through cutting-edge 
+                artificial intelligence. We combine advanced technology with deep ocean expertise 
+                to create solutions that protect, understand, and optimize our marine ecosystems.
+              </p>
+              <p className="text-lg text-slate-300 mb-8 leading-relaxed">
+                Our platform empowers maritime professionals, researchers, and coastal communities 
+                with AI-driven insights for navigation, sustainable development, and marine research.
+              </p>
+              
+              {/* Key Features */}
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center">
+                    <FaLightbulb className="text-cyan-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">Innovation</h4>
+                    <p className="text-slate-400 text-sm">Pioneering AI solutions for ocean intelligence</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
+                    <FaUsers className="text-blue-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">Community</h4>
+                    <p className="text-slate-400 text-sm">Supporting coastal communities worldwide</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
+                    <FaHeart className="text-green-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">Sustainability</h4>
+                    <p className="text-slate-400 text-sm">Protecting marine ecosystems for future generations</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Content - Stats */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="relative"
+            >
+              <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50">
+                <h3 className="text-2xl font-bold text-white mb-8 text-center">Our Impact</h3>
+                
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center p-6 bg-cyan-500/10 rounded-2xl border border-cyan-500/20">
+                    <div className="text-3xl font-bold text-cyan-400 mb-2">500+</div>
+                    <div className="text-slate-300 text-sm">Maritime Routes</div>
+                    <div className="text-slate-400 text-xs">Optimized</div>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-blue-500/10 rounded-2xl border border-blue-500/20">
+                    <div className="text-3xl font-bold text-blue-400 mb-2">50+</div>
+                    <div className="text-slate-300 text-sm">Coastal Communities</div>
+                    <div className="text-slate-400 text-xs">Supported</div>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-purple-500/10 rounded-2xl border border-purple-500/20">
+                    <div className="text-3xl font-bold text-purple-400 mb-2">100TB+</div>
+                    <div className="text-slate-300 text-sm">Ocean Data</div>
+                    <div className="text-slate-400 text-xs">Processed</div>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-green-500/10 rounded-2xl border border-green-500/20">
+                    <div className="text-3xl font-bold text-green-400 mb-2">24/7</div>
+                    <div className="text-slate-300 text-sm">AI Monitoring</div>
+                    <div className="text-slate-400 text-xs">Active</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </section>
-      </main>
-    </div>
+
+          {/* Team Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-center"
+          >
+            <h3 className="text-3xl font-bold text-white mb-8">Built by Ocean Enthusiasts</h3>
+            <p className="text-lg text-slate-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+              Our team combines expertise in artificial intelligence, marine science, and sustainable development 
+              to create solutions that make a real difference in ocean conservation and maritime industries.
+            </p>
+            
+            {/* CTA Button */}
+            <motion.button
+              onClick={handleAsk}
+              className="group relative inline-flex items-center justify-center px-8 py-4 font-poppins text-lg font-medium text-white bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full overflow-hidden shadow-2xl transition-all duration-300"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: '0 25px 50px rgba(6,182,212,0.25)'
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+              <FaGlobe className="relative z-10 mr-3" />
+              <span className="relative z-10">Join Our Mission</span>
+              <motion.div
+                className="relative z-10 ml-3"
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <FaArrowRight />
+              </motion.div>
+            </motion.button>
+          </motion.div>
+        </div>
+      </section>
+      
+      </div>
+    </>
   )
 }
 
-// Statistics Card Component
-const StatCard = ({ number, label, icon: Icon }) => (
-  <div className="bg-slate-800/70 backdrop-blur-sm rounded-xl p-4 border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300 group hover:scale-105">
-    <div className="flex items-center justify-center mb-3">
-      <div className="p-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full group-hover:scale-110 transition-transform">
-        <Icon className="text-lg text-white" />
-      </div>
-    </div>
-    <div className="text-2xl font-bold text-white text-center mb-1">{number}</div>
-    <div className="text-sm text-slate-400 text-center font-medium">{label}</div>
-  </div>
-);
-
-// Quick Action Card Component
-const QuickActionCard = ({ icon: Icon, title, description, color }) => {
+// Enhanced Module Feature Component
+const ModuleFeature = ({ icon, title, description, color }) => {
   const colorClasses = {
-    cyan: 'hover:border-cyan-500/50 hover:bg-cyan-500/10',
-    blue: 'hover:border-blue-500/50 hover:bg-blue-500/10',
-    purple: 'hover:border-purple-500/50 hover:bg-purple-500/10',
-    green: 'hover:border-green-500/50 hover:bg-green-500/10'
+    cyan: 'text-cyan-400 border-cyan-500/30 hover:border-cyan-400',
+    blue: 'text-blue-400 border-blue-500/30 hover:border-blue-400',
+    indigo: 'text-indigo-400 border-indigo-500/30 hover:border-indigo-400',
+    purple: 'text-purple-400 border-purple-500/30 hover:border-purple-400',
+    teal: 'text-teal-400 border-teal-500/30 hover:border-teal-400',
+    violet: 'text-violet-400 border-violet-500/30 hover:border-violet-400'
   };
 
   return (
-    <div className={`p-6 rounded-xl bg-slate-800/50 border border-slate-700 transition-all duration-300 cursor-pointer ${colorClasses[color]} group hover:scale-105`}>
-      <Icon className={`text-2xl text-${color}-400 mb-3 group-hover:scale-110 transition-transform`} />
-      <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-      <p className="text-slate-400">{description}</p>
+    <div className={`p-6 rounded-xl bg-slate-800/50 border ${colorClasses[color]} transition-all duration-300 hover:transform hover:scale-105`}>
+      <div className={`text-2xl ${colorClasses[color].split(' ')[0]} mb-3`}>
+        {icon}
+      </div>
+      <h4 className="text-lg font-semibold text-white mb-2">{title}</h4>
+      <p className="text-slate-400 text-sm leading-relaxed">{description}</p>
     </div>
   );
 };
 
-// Feature Card Component
-const FeatureCard = ({ icon: Icon, title, description, gradient }) => (
-  <div className="group p-6 rounded-xl bg-gradient-to-b from-slate-800 to-slate-800/50 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 hover:scale-105">
-    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-      <Icon className="text-white text-xl" />
-    </div>
-    <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-cyan-400 transition-colors">
-      {title}
-    </h3>
-    <p className="text-slate-400 leading-relaxed">
-      {description}
-    </p>
-  </div>
-);
+// Quick Access Card Component - FIXED
+const QuickAccessCard = ({ icon, title, description, color, onClick }) => {
+  const getColorClasses = (color) => {
+    switch(color) {
+      case 'cyan':
+        return {
+          background: 'from-cyan-900/50 to-cyan-900/20',
+          border: 'border-cyan-500/30 hover:border-cyan-400',
+          iconColor: 'text-cyan-400',
+          hoverColor: 'hover:text-cyan-300'
+        };
+      case 'blue':
+        return {
+          background: 'from-blue-900/50 to-blue-900/20',
+          border: 'border-blue-500/30 hover:border-blue-400',
+          iconColor: 'text-blue-400',
+          hoverColor: 'hover:text-blue-300'
+        };
+      case 'purple':
+        return {
+          background: 'from-purple-900/50 to-purple-900/20',
+          border: 'border-purple-500/30 hover:border-purple-400',
+          iconColor: 'text-purple-400',
+          hoverColor: 'hover:text-purple-300'
+        };
+      default:
+        return {
+          background: 'from-slate-900/50 to-slate-900/20',
+          border: 'border-slate-500/30 hover:border-slate-400',
+          iconColor: 'text-slate-400',
+          hoverColor: 'hover:text-slate-300'
+        };
+    }
+  };
 
-// Technology Card Component
-const TechCard = ({ title, description }) => (
-  <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-cyan-500/30 transition-all duration-300 group">
-    <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-cyan-400 transition-colors">{title}</h4>
-    <p className="text-slate-400 text-sm">{description}</p>
-  </div>
-);
+  const colors = getColorClasses(color);
+
+  return (
+    <div 
+      className={`text-center p-8 rounded-2xl bg-gradient-to-b ${colors.background} border ${colors.border} transition-all duration-300 hover:transform hover:scale-105 cursor-pointer`} 
+      onClick={onClick}
+    >
+      <div className={`text-4xl ${colors.iconColor} mx-auto mb-4`}>
+        {icon}
+      </div>
+      <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
+      <p className="text-slate-300 mb-4">{description}</p>
+      <button className={`${colors.iconColor} ${colors.hoverColor} font-medium transition-colors`}>
+        Learn More →
+      </button>
+    </div>
+  );
+};

@@ -10,22 +10,22 @@ export const Launch = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Progress animation - exactly 5 seconds
+    // Progress animation - reduced to 2.5 seconds
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 2; // 2% every 100ms = 5 seconds total
+        return prev + 4; // 4% every 100ms = 2.5 seconds total
       });
     }, 100);
 
-    // Auto-navigate after exactly 5 seconds
+    // Auto-navigate after 2.5 seconds
     const navigationTimer = setTimeout(() => {
       setShowIntro(false);
-      setTimeout(() => navigate('/dashboard'), 500);
-    }, 5000);
+      setTimeout(() => navigate('/dashboard'), 300);
+    }, 2500);
 
     return () => {
       clearInterval(progressInterval);
@@ -87,91 +87,39 @@ export const Launch = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="mb-8"
               >
-                <div className="flex items-center justify-center gap-12 mb-4">
-                  {/* FloatChat Logo */}
-                  <motion.div 
-                    className="relative"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Enhanced Background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur-2xl scale-150 animate-pulse"></div>
-                    <div className="absolute inset-0 bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-cyan-500/30 shadow-2xl shadow-cyan-500/20"></div>
-                    
-                    {/* Logo Container */}
-                    <div className="relative p-6 rounded-2xl bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-cyan-400/20 backdrop-blur-sm">
+                <div className="flex items-center justify-center gap-8 mb-4">
+                  {/* FloatChat Logo - Enhanced Visibility */}
+                  <div className="relative">
+                    {/* Background container for better visibility */}
+                    <div className="absolute inset-0 bg-black/15 backdrop-blur-sm rounded-2xl border border-white/20 shadow-2xl scale-110"></div>
+                    <div className="relative bg-black/10 backdrop-blur-md rounded-2xl p-4 border border-cyan-300/30">
                       <img
                         src={FloatChatLogo}
                         alt="FloatChat Logo"
-                        className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 filter brightness-125 contrast-110 drop-shadow-2xl relative z-10"
+                        className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-150 contrast-125 saturate-110 drop-shadow-2xl relative z-10"
                       />
-                      
-                      {/* Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-2xl animate-pulse"></div>
                     </div>
-                    
-                    {/* Label */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.2 }}
-                      className="text-center mt-3"
-                    >
-                      <p className="text-sm text-cyan-300 font-poppins font-medium">FloatChat</p>
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Enhanced Separator */}
-                  <div className="flex flex-col items-center">
-                    <div className="w-0.5 h-20 md:h-24 bg-gradient-to-b from-transparent via-cyan-400/60 to-transparent"></div>
-                    <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent my-2"></div>
-                    <div className="w-0.5 h-20 md:h-24 bg-gradient-to-b from-transparent via-blue-400/60 to-transparent"></div>
                   </div>
 
-                  {/* SyntaxSquad Logo */}
-                  <motion.div 
-                    className="relative"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Enhanced Background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-2xl scale-150 animate-pulse"></div>
-                    <div className="absolute inset-0 bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-blue-500/30 shadow-2xl shadow-blue-500/20"></div>
-                    
-                    {/* Logo Container */}
-                    <div className="relative p-6 rounded-2xl bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-blue-400/20 backdrop-blur-sm">
+                  {/* Enhanced Separator */}
+                  <div className="relative">
+                    <div className="w-0.5 h-16 md:h-20 bg-gradient-to-b from-transparent via-cyan-300/70 to-transparent"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-cyan-400 rounded-full shadow-lg"></div>
+                  </div>
+
+                  {/* SyntaxSquad Logo - Enhanced Visibility */}
+                  <div className="relative">
+                    {/* Background container for better visibility */}
+                    <div className="absolute inset-0 bg-black/15 backdrop-blur-sm rounded-2xl border border-white/20 shadow-2xl scale-110"></div>
+                    <div className="relative bg-black/10 backdrop-blur-md rounded-2xl p-4 border border-purple-300/30">
                       <img
                         src={SyntaxSquadLogo}
                         alt="SyntaxSquad Logo"
-                        className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 filter brightness-125 contrast-110 drop-shadow-2xl relative z-10"
+                        className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 filter brightness-150 contrast-125 saturate-110 drop-shadow-2xl relative z-10"
                       />
-                      
-                      {/* Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-2xl animate-pulse"></div>
                     </div>
-                    
-                    {/* Label */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.6, duration:1 }}
-                      className="text-center mt-3"
-                    >
-                      <p className="text-sm text-blue-300 font-poppins font-medium">Syntax Squad</p>
-                    </motion.div>
-                  </motion.div>
+                  </div>
                 </div>
-                
-                {/* Partnership  Text */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.6, duration: 1 }}
-                  className="text-center mt-6"
-                >
-                 
-                  <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-slate-400/50 to-transparent mx-auto mt-2"></div>
-                </motion.div>
               </motion.div>
 
               {/* Brand Name - Crystal Clear */}

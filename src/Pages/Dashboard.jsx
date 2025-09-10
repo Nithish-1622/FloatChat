@@ -572,7 +572,7 @@ export const Dashboard = () => {
                 filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3))',
               }}
             >
-              {/* Background Image */}
+              {/* Background Image  */}
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${livelihoodImg})` }}

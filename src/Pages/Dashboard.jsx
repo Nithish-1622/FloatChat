@@ -43,12 +43,12 @@ export const Dashboard = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled 
-            ? 'bg-slate-900/20 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/5' 
-            : 'bg-slate-900/10 backdrop-blur-sm'
+            ? '  backdrop-blur-xl  shadow-lg shadow-black/5' 
+            : ' backdrop-blur-sm'
         }`}
         style={{
-          backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'blur(10px)',
-          WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'blur(10px)',
+          backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'blur(0px)',
+          WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'blur(0px)',
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -332,7 +332,7 @@ export const Dashboard = () => {
         {/* Marine Navigation Module */}
         <section id="marine-navigation" className="mb-24">
           <div className="max-w-6xl mx-auto">
-            <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 backdrop-blur-sm rounded-3xl p-8 border border-cyan-500/20 shadow-2xl">
+            <div className="bg-gradient-to-r from-cyan-900/30 to-cyan-500/30 backdrop-blur-sm rounded-3xl p-8 border border-cyan-500/20 shadow-2xl">
               <div className="text-center mb-8">
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mb-6 shadow-lg">
                   <FaAnchor className="text-3xl text-white" />
@@ -381,7 +381,7 @@ export const Dashboard = () => {
         {/* Coastal Livelihood Module */}
         <section id="coastal-livelihood" className="mb-24">
           <div className="max-w-6xl mx-auto">
-            <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 backdrop-blur-sm rounded-3xl p-8 border border-blue-500/20 shadow-2xl">
+            <div className="bg-gradient-to-r from-blue-900/30 to-blue-500/30 backdrop-blur-sm rounded-3xl p-8 border border-blue-500/20 shadow-2xl">
               <div className="text-center mb-8">
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mb-6 shadow-lg">
                   <FaFish className="text-3xl text-white" />
@@ -477,7 +477,7 @@ export const Dashboard = () => {
         </section>
 
         {/* All Modules Overview */}
-        <section id="modules" className="mb-20">
+        <section id="blogs" className="mb-20">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <FaWater className="text-5xl text-teal-400 mx-auto mb-4" />
@@ -513,7 +513,128 @@ export const Dashboard = () => {
           </div>
         </section>
       </div>
+
+      
+      {/* Compact Professional Footer */}
+<footer id="about" className="bg-gradient-to-r from-slate-800 to-slate-900 border-t border-slate-700/50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    {/* Main Footer Content */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+      
+      {/* Company Info */}
+      <motion.div 
+        className="space-y-4"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <div className="flex items-center space-x-3">
+          <img src={img1} alt="FloatChat Logo" className="w-8 h-8 rounded-lg" />
+          <div>
+            <h3 className="text-lg font-bold text-white font-poppins">FloatChat</h3>
+            <p className="text-xs text-cyan-400">by SYNTAX SQUAD</p>
+          </div>
+        </div>
+        <p className="text-slate-400 text-sm leading-relaxed">
+          AI-powered ocean intelligence platform revolutionizing marine navigation and research.
+        </p>
+      </motion.div>
+
+      {/* Quick Links */}
+      <motion.div 
+        className="space-y-4"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        viewport={{ once: true }}
+      >
+        <h4 className="text-md font-semibold text-white font-poppins">Quick Links</h4>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            'About Us', 'Marine Navigation', 'Ocean Research', 'Contact',
+            'Documentation', 'API Reference', 'Support', 'Privacy'
+          ].map((link, index) => (
+            <a 
+              key={link}
+              href="#" 
+              className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 text-sm"
+            >
+              {link}
+            </a>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Contact & Social */}
+      <motion.div 
+        className="space-y-4"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <h4 className="text-md font-semibold text-white font-poppins">Connect</h4>
+        <div className="space-y-2">
+          <a href="mailto:support@floatchat.ai" className="block text-slate-400 hover:text-cyan-400 transition-colors text-sm">
+            support@floatchat.ai
+          </a>
+          <p className="text-slate-400 text-sm">24/7 Maritime Support</p>
+        </div>
+        
+        {/* Social Links */}
+        <div className="flex space-x-3">
+          {[
+            { icon: '🌊', label: 'Ocean Network' },
+            { icon: '📧', label: 'Email' },
+            { icon: '🔗', label: 'LinkedIn' },
+            { icon: '🐙', label: 'GitHub' }
+          ].map((social, index) => (
+            <motion.a
+              key={social.label}
+              href="#"
+              className="w-8 h-8 bg-slate-700/50 hover:bg-cyan-500/20 rounded-full flex items-center justify-center transition-all duration-300 border border-slate-600/50 hover:border-cyan-400/50"
+              whileHover={{ scale: 1.1 }}
+            >
+              <span className="text-sm">{social.icon}</span>
+            </motion.a>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+
+    {/* Bottom Bar */}
+    <div className="border-t border-slate-700/50 pt-6">
+      <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+        
+        {/* Copyright */}
+        <div className="text-sm text-slate-400 text-center md:text-left">
+          © 2024 FloatChat by SYNTAX SQUAD. All rights reserved.
+        </div>
+
+        {/* Tech Credits */}
+
       </div>
+    </div>
+  </div>
+</footer>
+
+{/* Compact Back to Top Button */}
+<motion.button
+  className="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40 flex items-center justify-center"
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  initial={{ opacity: 0, y: 100 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 2 }}
+>
+  ↑
+</motion.button>
+      </div>
+
+      
     </>
   )
 }
@@ -590,6 +711,9 @@ const QuickAccessCard = ({ icon, title, description, color, onClick }) => {
       <button className={`${colors.iconColor} ${colors.hoverColor} font-medium transition-colors`}>
         Learn More →
       </button>
+
+      
     </div>
   );
 };
+

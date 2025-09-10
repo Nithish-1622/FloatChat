@@ -6,7 +6,7 @@ export const ChatBot = () => {
   const [messages, setMessages] = useState([
     {
       type: 'bot',
-      content: "Hello! I'm OceanBot. Ask me anything about marine life, ocean data, or marine ecosystems!"
+      content: "Hello! I'm FloatChat. Ask me anything about marine life, ocean data, or marine ecosystems!"
     }
   ]);
   const [input, setInput] = useState('');
@@ -35,7 +35,7 @@ export const ChatBot = () => {
         <div className="bg-white/10 backdrop-blur-lg rounded-t-2xl p-4 border-b border-white/20">
           <div className="flex items-center gap-3">
             <FaWater className="text-2xl text-cyan-300" />
-            <h1 className="text-white text-xl font-semibold">OceanBot</h1>
+            <h1 className="text-white text-xl font-semibold">FloatChat</h1>
           </div>
         </div>
 

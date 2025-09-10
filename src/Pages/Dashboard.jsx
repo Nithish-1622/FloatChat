@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import water from '../Assets/water.mp4'
 import { useNavigate } from 'react-router-dom'
-import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch, FaCubes, FaMap, FaBell, FaInfoCircle, FaHome, FaUsers, FaHeart, FaGlobe, FaLightbulb, FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa'
+import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch, FaCubes, FaMap, FaBell, FaInfoCircle, FaHome, FaUsers, FaHeart, FaGlobe, FaLightbulb, FaLinkedin, FaTwitter, FaGithub, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 import img1 from '../assets/FloatChat.png'
 import navigationImg from '../assets/Navigatiion.jpg'
 import livelihoodImg from '../assets/Livelihood.jpg'
@@ -715,188 +715,148 @@ export const Dashboard = () => {
           </div>
         </section>
 
-        {/* All Modules Overview */}
-        <section id="modules" className="mb-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <FaWater className="text-5xl text-teal-400 mx-auto mb-4" />
-              <h2 className="text-4xl font-bold text-white mb-4">Complete Ocean Intelligence Suite</h2>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                Integrated solutions for comprehensive ocean management and exploration
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <QuickAccessCard 
-                icon={<FaAnchor />}
-                title="Marine Navigation"
-                description="Smart navigation for all maritime sectors"
-                color="cyan"
-                onClick={() => handleModuleNavigation('marine-navigation')}
-              />
-              <QuickAccessCard 
-                icon={<FaFish />}
-                title="Coastal Livelihood"
-                description="Sustainable coastal development"
-                color="blue"
-                onClick={() => handleModuleNavigation('coastal-livelihood')}
-              />
-              <QuickAccessCard 
-                icon={<FaSearch />}
-                title="Marine Research"
-                description="Advanced ocean analytics"
-                color="purple"
-                onClick={() => handleModuleNavigation('research')}
-              />
-            </div>
-          </div>
-        </section>
+       
       </div>
 
-      {/* About Us Section */}
-      <section id="about" className="w-full bg-gradient-to-b from-slate-800 to-slate-900 py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          {/* Section Header */}
+      {/* Simple About Us Section */}
+      <section id="about" className="w-full bg-gradient-to-b from-slate-800 to-slate-900 py-16">
+        <div className="max-w-4xl mx-auto px-6">
+          
+          {/* Header */}
           <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 50 }}
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center justify-center w-16 h-16 bg-cyan-500/20 backdrop-blur-md rounded-2xl mb-6 border border-cyan-400/30">
               <FaInfoCircle className="text-2xl text-cyan-400" />
             </div>
-            <h2 className="text-5xl font-bold text-white mb-6">About FloatChat</h2>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Pioneering the future of ocean intelligence through innovative AI solutions
+            <h2 className="text-4xl font-bold text-white mb-4">About FloatChat</h2>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              AI-powered ocean intelligence platform for marine navigation, coastal development, and research
             </p>
           </motion.div>
 
-          {/* Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
-            {/* Left Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <h3 className="text-3xl font-bold text-white mb-6">Our Mission</h3>
-              <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-                FloatChat is dedicated to revolutionizing marine intelligence through cutting-edge 
-                artificial intelligence. We combine advanced technology with deep ocean expertise 
-                to create solutions that protect, understand, and optimize our marine ecosystems.
-              </p>
-              <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-                Our platform empowers maritime professionals, researchers, and coastal communities 
-                with AI-driven insights for navigation, sustainable development, and marine research.
-              </p>
-              
-              {/* Key Features */}
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center">
-                    <FaLightbulb className="text-cyan-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold">Innovation</h4>
-                    <p className="text-slate-400 text-sm">Pioneering AI solutions for ocean intelligence</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
-                    <FaUsers className="text-blue-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold">Community</h4>
-                    <p className="text-slate-400 text-sm">Supporting coastal communities worldwide</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
-                    <FaHeart className="text-green-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold">Sustainability</h4>
-                    <p className="text-slate-400 text-sm">Protecting marine ecosystems for future generations</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Content - Stats */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative"
-            >
-              <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50">
-                <h3 className="text-2xl font-bold text-white mb-8 text-center">Our Impact</h3>
-                
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center p-6 bg-cyan-500/10 rounded-2xl border border-cyan-500/20">
-                    <div className="text-3xl font-bold text-cyan-400 mb-2">500+</div>
-                    <div className="text-slate-300 text-sm">Maritime Routes</div>
-                    <div className="text-slate-400 text-xs">Optimized</div>
-                  </div>
-                  
-                  <div className="text-center p-6 bg-blue-500/10 rounded-2xl border border-blue-500/20">
-                    <div className="text-3xl font-bold text-blue-400 mb-2">50+</div>
-                    <div className="text-slate-300 text-sm">Coastal Communities</div>
-                    <div className="text-slate-400 text-xs">Supported</div>
-                  </div>
-                  
-                  <div className="text-center p-6 bg-purple-500/10 rounded-2xl border border-purple-500/20">
-                    <div className="text-3xl font-bold text-purple-400 mb-2">100TB+</div>
-                    <div className="text-slate-300 text-sm">Ocean Data</div>
-                    <div className="text-slate-400 text-xs">Processed</div>
-                  </div>
-                  
-                  <div className="text-center p-6 bg-green-500/10 rounded-2xl border border-green-500/20">
-                    <div className="text-3xl font-bold text-green-400 mb-2">24/7</div>
-                    <div className="text-slate-300 text-sm">AI Monitoring</div>
-                    <div className="text-slate-400 text-xs">Active</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Team Section */}
+          {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-center"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-slate-800/50 backdrop-blur-md rounded-2xl p-8 border border-slate-700/50"
           >
-            <h3 className="text-3xl font-bold text-white mb-8">Built by Ocean Enthusiasts</h3>
-            <p className="text-lg text-slate-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-              Our team combines expertise in artificial intelligence, marine science, and sustainable development 
-              to create solutions that make a real difference in ocean conservation and maritime industries.
-            </p>
-            
-            {/* CTA Button */}
+            <div className="grid md:grid-cols-2 gap-8">
+              
+              {/* Contact Details */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Contact Us</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center">
+                      <FaEnvelope className="text-cyan-400" />
+                    </div>
+                    <div>
+                      <p className="text-slate-300 text-sm">Email</p>
+                      <p className="text-white font-medium">contact@floatchat.com</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
+                      <FaPhone className="text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="text-slate-300 text-sm">Phone</p>
+                      <p className="text-white font-medium">+1 (555) 123-4567</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <div className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center">
+                      <FaMapMarkerAlt className="text-purple-400" />
+                    </div>
+                    <div>
+                      <p className="text-slate-300 text-sm">Address</p>
+                      <p className="text-white font-medium">Ocean Tech Hub, Marine Drive</p>
+                      <p className="text-slate-300 text-sm">San Francisco, CA 94102</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Info */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Quick Info</h3>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-slate-300 text-sm">Founded</p>
+                    <p className="text-white font-medium">2024</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-slate-300 text-sm">Industry</p>
+                    <p className="text-white font-medium">Marine Technology & AI</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-slate-300 text-sm">Services</p>
+                    <p className="text-white font-medium">Ocean Intelligence Solutions</p>
+                  </div>
+                  
+                  <div>
+                    <p className="text-slate-300 text-sm">Support Hours</p>
+                    <p className="text-white font-medium">24/7 Available</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="mt-8 pt-6 border-t border-slate-700/50">
+              <div className="flex justify-center space-x-4">
+                <a 
+                  href="#" 
+                  className="w-10 h-10 bg-cyan-500/20 rounded-full flex items-center justify-center hover:bg-cyan-500/30 transition-colors duration-200"
+                >
+                  <FaLinkedin className="text-cyan-400" />
+                </a>
+                <a 
+                  href="#" 
+                  className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center hover:bg-blue-500/30 transition-colors duration-200"
+                >
+                  <FaTwitter className="text-blue-400" />
+                </a>
+                <a 
+                  href="#" 
+                  className="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center hover:bg-purple-500/30 transition-colors duration-200"
+                >
+                  <FaGithub className="text-purple-400" />
+                </a>
+                <a 
+                  href="#" 
+                  className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center hover:bg-green-500/30 transition-colors duration-200"
+                >
+                  <FaGlobe className="text-green-400" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Simple CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mt-8"
+          >
             <motion.button
               onClick={handleAsk}
-              className="group relative inline-flex items-center justify-center px-8 py-4 font-poppins text-lg font-medium text-white bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full overflow-hidden shadow-2xl transition-all duration-300"
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: '0 25px 50px rgba(6,182,212,0.25)'
-              }}
+              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium rounded-full hover:from-cyan-400 hover:to-blue-400 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-              <FaGlobe className="relative z-10 mr-3" />
-              <span className="relative z-10">Join Our Mission</span>
-              <motion.div
-                className="relative z-10 ml-3"
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <FaArrowRight />
-              </motion.div>
+              <FaEnvelope className="mr-2" />
+              Get Started
             </motion.button>
           </motion.div>
         </div>

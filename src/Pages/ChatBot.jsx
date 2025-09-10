@@ -54,7 +54,7 @@ export const ChatBot = () => {
           ))}
         </div>
 
-        {/* Input Area */}
+        {/* Input Area   */}
         <form onSubmit={handleSend} className="bg-white/10 backdrop-blur-lg rounded-b-2xl p-4 border-t border-white/20">
           <div className="flex gap-2">
             <input

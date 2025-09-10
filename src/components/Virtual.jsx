@@ -211,18 +211,12 @@ const Virtual = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-24 right-6 w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 z-50 flex items-center justify-center group"
+            className="fixed bottom-24 right-5 w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 z-50 flex items-center justify-center group"
           >
-            <FaRobot className="text-2xl group-hover:scale-110 transition-transform" />
+            <FaRobot className="text-3xl group-hover:scale-110 transition-transform" />
             
             {/* Notification Badge */}
-            <motion.div
-              className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              AI
-            </motion.div>
+            
 
             {/* Pulse Animation */}
             <motion.div

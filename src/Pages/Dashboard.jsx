@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import water from '../Assets/water.mp4'
+// import water from '../Assets/water.mp4'
 import { useNavigate } from 'react-router-dom'
 import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch } from 'react-icons/fa'
 import img1 from '../assets/FloatChat.png'
@@ -200,14 +200,14 @@ export const Dashboard = () => {
       {/* Hero Section */}
       <div className="relative w-full min-h-screen bg-slate-900">
         {/* Video Background */}
-        <video
+        {/* <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           autoPlay
           loop
           muted
         >
           <source src={water} type="video/mp4" />
-        </video>
+        </video> */}
 
         {/* Enhanced Gradient Overlay */}
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>

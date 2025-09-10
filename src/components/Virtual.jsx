@@ -6,7 +6,7 @@ import {
   FaPaperPlane, 
   FaMicrophone, 
   FaLanguage,
-  FaMinimize,
+  FaMinus,
   FaExpand,
   FaTrash,
   FaDownload
@@ -284,7 +284,7 @@ const Virtual = () => {
                   onClick={() => setIsMinimized(!isMinimized)}
                   className="p-1 hover:bg-white/20 rounded transition-colors"
                 >
-                  {isMinimized ? <FaExpand className="text-xs" /> : <FaMinimize className="text-xs" />}
+                  {isMinimized ? <FaExpand className="text-xs" /> : <FaMinus className="text-xs" />}
                 </button>
                 
                 <button

@@ -4,6 +4,7 @@ import water from '../Assets/water.mp4'
 import { useNavigate } from 'react-router-dom'
 import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch } from 'react-icons/fa'
 import img1 from '../assets/FloatChat.png'
+import  Virtual from '../components/Virtual.jsx'
 export const Dashboard = () => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -633,7 +634,7 @@ export const Dashboard = () => {
   ↑
 </motion.button>
       </div>
-
+          <Virtual />
       
     </>
   )

@@ -21,7 +21,7 @@ export const MarineNavigation = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Update time every second for real-time feel
+  // Update time every second for real-time 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);

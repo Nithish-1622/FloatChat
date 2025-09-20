@@ -560,7 +560,7 @@ export const Dashboard = () => {
           </div>
         </section>
 
-        {/* Coastal Livelihood Module - Background Design */}
+        {/* Coastal Livelihood Module     - Background Design */}
         <section id="coastal-livelihood" className="mb-24">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div 
@@ -581,7 +581,7 @@ export const Dashboard = () => {
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-slate-900/30 via-slate-900/55 to-slate-900/70" />
               
-              {/* Content positioned on the right */}
+              {/* Content positioned on the right    */}
               <div className="relative z-10 w-full max-w-2xl ml-auto p-12 lg:p-16">
                 <motion.div
                   initial={{ opacity: 0, x: 50 }}

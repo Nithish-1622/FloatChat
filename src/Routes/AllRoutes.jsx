@@ -3,7 +3,10 @@ import { Routes, Route } from 'react-router-dom'
 import { Launch } from '../Pages/Launch'
 import { Dashboard } from '../Pages/Dashboard'
 import { ChatBot } from '../Pages/ChatBot'
-import  Virtual  from '../components/Virtual.jsx'
+import  Virtual   from '../components/Virtual.jsx'
+import { MarineNavigation } from '../Pages/MarineNavigation'
+import { CoastalLivelihood }from '../components/CoastalLivelihood.jsx'
+import { MarineResearch } from '../Pages/MarineResearch'
 
 export const AllRoutes = () => {
   return (
@@ -13,6 +16,9 @@ export const AllRoutes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/chatbot" element={<ChatBot />} />
         <Route path="/virtual" element={<Virtual />} />
+        <Route path='/marine-navigation' element={<MarineNavigation />} />
+        <Route path='/coastal-livelihood' element={<CoastalLivelihood />} />
+        <Route path='/marine-research' element={<MarineResearch />} />
       </Routes>
     </div>
   )

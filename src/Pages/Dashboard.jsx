@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import water from '../assets/water.mp4'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch, FaCubes, FaMap, FaBell, FaInfoCircle, FaHome, FaUsers, FaHeart, FaGlobe, FaLightbulb, FaLinkedin, FaTwitter, FaGithub, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
 import img1 from '../assets/FloatChat.png'
 import  Virtual from '../components/Virtual.jsx'
@@ -15,6 +15,9 @@ export const Dashboard = () => {
 
   const handleAsk = () => {
     navigate('/chatbot');
+  }
+  const HanNavigate = () => {
+    navigate('/marine-navigation');
   }
 
     const handleModuleNavigation = (moduleId) => {
@@ -217,10 +220,12 @@ export const Dashboard = () => {
                               <FaAnchor className="text-cyan-400" />
                               <span>Marine Navigation</span>
                             </button>
+                            
                             <button
                               onClick={() => handleModuleNavigation('coastal-livelihood')}
                               className="w-full flex items-center space-x-3 px-4 py-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors duration-200"
                             >
+                              
                               <FaFish className="text-blue-400" />
                               <span>Coastal Livelihood</span>
                             </button>
@@ -534,7 +539,7 @@ export const Dashboard = () => {
                         </p>
                         
                         <motion.button
-                          onClick={() => handleModuleNavigation('marine-navigation')}
+                          onClick={ () => navigate('/marine-navigation') }
                           className="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg rounded-2xl transition-all duration-300 overflow-hidden"
                           style={{
                             boxShadow: '0 20px 40px -12px rgba(6, 182, 212, 0.4), 0 8px 25px -8px rgba(0, 0, 0, 0.3)',
@@ -611,7 +616,7 @@ export const Dashboard = () => {
                         </p>
                         
                         <motion.button
-                          onClick={() => handleModuleNavigation('coastal-livelihood')}
+                          onClick={() => navigate('/coastal-livelihood')}
                           className="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg rounded-2xl transition-all duration-300 overflow-hidden"
                           style={{
                             boxShadow: '0 20px 40px -12px rgba(59, 130, 246, 0.4), 0 8px 25px -8px rgba(0, 0, 0, 0.3)',
@@ -689,7 +694,7 @@ export const Dashboard = () => {
                         </p>
                         
                         <motion.button
-                          onClick={() => handleModuleNavigation('research')}
+                          onClick={() => navigate('/marine-research')}
                           className="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold text-lg rounded-2xl transition-all duration-300 overflow-hidden"
                           style={{
                             boxShadow: '0 20px 40px -12px rgba(147, 51, 234, 0.4), 0 8px 25px -8px rgba(0, 0, 0, 0.3)',

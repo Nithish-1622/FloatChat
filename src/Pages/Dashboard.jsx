@@ -77,7 +77,7 @@ export const Dashboard = () => {
   const navItems = [
     { name: 'Home', href: '#home', icon: FaHome },
     { name: 'Modules', href: '#modules', icon: FaCubes },
-    { name: 'Map', href: '#map', icon: FaMap },
+    { name: 'News', href: '#map', icon: FaMap },
     { name: 'Notification', href: '#notification', icon: FaBell },
     { name: 'About Us', href: '#about', icon: FaInfoCircle },
   ];

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import water from '../assets/water.mp4'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch, FaCubes, FaMap, FaBell, FaInfoCircle, FaHome, FaUsers, FaHeart, FaGlobe, FaLightbulb, FaLinkedin, FaTwitter, FaGithub, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch, FaCubes, FaMap, FaBell, FaInfoCircle, FaHome, FaUsers, FaHeart, FaGlobe, FaLightbulb, FaLinkedin, FaTwitter, FaGithub, FaPhone, FaMapMarkerAlt, FaNewspaper } from 'react-icons/fa'
 import img1 from '../assets/FloatChat.png'
 import  Virtual from '../components/Virtual.jsx'
 import navigationImg from '../assets/Navigatiion.jpg'
@@ -42,7 +42,10 @@ export const Dashboard = () => {
           behavior: 'smooth'
         });
       }
-    } else {
+    } else if (href.startsWith('/')) {
+    // Handle route navigation for pages like /news
+    navigate(href);
+  }else {
       // Handle other navigation items if needed
       const element = document.querySelector(href);
       if (element) {
@@ -77,7 +80,7 @@ export const Dashboard = () => {
   const navItems = [
     { name: 'Home', href: '#home', icon: FaHome },
     { name: 'Modules', href: '#modules', icon: FaCubes },
-    { name: 'News', href: '#map', icon: FaMap },
+    { name: 'News', href: '/news', icon: FaNewspaper },
     { name: 'Notification', href: '#notification', icon: FaBell },
     { name: 'About Us', href: '#about', icon: FaInfoCircle },
   ];

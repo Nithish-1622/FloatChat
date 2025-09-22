@@ -7,6 +7,7 @@ import  Virtual   from '../components/Virtual.jsx'
 import { MarineNavigation } from '../Pages/MarineNavigation'
 import { CoastalLivelihood }from '../components/CoastalLivelihood.jsx'
 import { MarineResearch } from '../Pages/MarineResearch'
+import  News  from '../Pages/News'
 
 export const AllRoutes = () => {
   return (
@@ -19,6 +20,8 @@ export const AllRoutes = () => {
         <Route path='/marine-navigation' element={<MarineNavigation />} />
         <Route path='/coastal-livelihood' element={<CoastalLivelihood />} />
         <Route path='/marine-research' element={<MarineResearch />} />
+        <Route path='/news' element={<News />} />
+
       </Routes>
     </div>
   )

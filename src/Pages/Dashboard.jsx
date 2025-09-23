@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import water from '../assets/water.mp4'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch, FaCubes, FaMap, FaBell, FaInfoCircle, FaHome, FaUsers, FaHeart, FaGlobe, FaLightbulb, FaLinkedin, FaTwitter, FaGithub, FaPhone, FaMapMarkerAlt, FaNewspaper } from 'react-icons/fa'
+import { FaRobot, FaArrowRight, FaWater, FaFish, FaLeaf, FaBookOpen, FaEnvelope , FaAnchor , FaCompass , FaShip , FaShieldAlt , FaSearch, FaCubes, FaMap, FaBell, FaInfoCircle, FaHome, FaUsers, FaHeart, FaGlobe, FaLightbulb, FaLinkedin, FaTwitter, FaGithub, FaPhone, FaMapMarkerAlt, FaNewspaper, FaPlus, FaTimes, FaQuestionCircle } from 'react-icons/fa'
 import img1 from '../assets/FloatChat.png'
 import  Virtual from '../components/Virtual.jsx'
 import navigationImg from '../assets/Navigatiion.jpg'
@@ -12,7 +12,7 @@ export const Dashboard = () => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [showModulesDropdown, setShowModulesDropdown] = useState(false);
-
+  const [openIndex, setOpenIndex] = useState(null);
   const handleAsk = () => {
     navigate('/chatbot');
   }
@@ -53,6 +53,35 @@ export const Dashboard = () => {
       }
     }
   }
+
+  const toggleFAQ = (idx) => {
+    setOpenIndex(openIndex === idx ? null : idx);
+  };
+
+  // FAQ Data for FloatChat
+  const faqs = [
+    {
+      question: "What is FloatChat and how does it work?",
+      answer: "FloatChat is an AI-powered ocean intelligence platform that uses real-time oceanographic data from floating sensors to provide insights for marine navigation, research, and coastal development. It combines machine learning with live ocean data to deliver accurate predictions and recommendations."
+    },
+    {
+      question: "How accurate is the marine navigation data?",
+      answer: "Our marine navigation system uses data from multiple sources including Argo floats, satellite imagery, and weather stations to provide highly accurate real-time conditions. The AI algorithms continuously learn and improve, achieving over 95% accuracy in weather and current predictions."
+    },
+    {
+      question: "Can FloatChat help with coastal livelihood planning?",
+      answer: "Yes! FloatChat provides comprehensive coastal analysis including water quality monitoring, fish population tracking, and environmental impact assessments. This helps communities make informed decisions about aquaculture, fishing, and sustainable coastal development."
+    },
+    {
+      question: "What kind of marine research capabilities does FloatChat offer?",
+      answer: "FloatChat supports various research activities including ocean temperature monitoring, salinity tracking, marine biodiversity analysis, and climate change impact studies. Researchers can access historical data, real-time feeds, and predictive analytics for their studies."
+    },
+    {
+      question: "Is FloatChat suitable for commercial maritime operations?",
+      answer: "Absolutely! FloatChat provides enterprise-grade solutions for shipping companies, offshore operations, and maritime logistics. Features include route optimization, weather routing, fuel efficiency calculations, and safety monitoring."
+    }
+   
+  ];
 
   // Handle scroll effect for navbar
   useEffect(() => {
@@ -485,16 +514,107 @@ export const Dashboard = () => {
       <div className='w-full bg-gradient-to-b from-slate-900 to-slate-800 px-2 py-20'>
               
               {/* Section Header */}
-              <div className="max-w-6xl mx-auto text-center mb-16">
-                <h2 className="text-5xl font-bold text-white mb-6">Ocean Intelligence Modules</h2>
-                <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                  Comprehensive AI-powered solutions for marine navigation, coastal development, and ocean research
-                </p>
-              </div>
+{/* Enhanced Section Header */}
+<div className="max-w-6xl mx-auto text-center mb-16">
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    className="space-y-6"
+  >
+    {/* Subtitle Badge */}
+
+
+    {/* Main Heading */}
+    <motion.h2 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      viewport={{ once: true }}
+      className="text-5xl md:text-6xl lg:text-6xl font-bold leading-tight"
+    >
+      <span className="block text-white mb-2">Ocean Intelligence</span>
+      <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent relative">
+        Modules
+        {/* Decorative underline */}
+        
+      </span>
+    </motion.h2>
+
+    {/* Enhanced Description */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.5 }}
+      viewport={{ once: true }}
+      className="max-w-4xl mx-auto"
+    >
+      <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-6">
+        Comprehensive <span className="text-cyan-400 font-semibold">AI-powered solutions</span> for marine navigation, 
+        coastal development, and <span className="text-blue-400 font-semibold">ocean research</span>
+      </p>
+      
+      {/* Feature highlights */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+        viewport={{ once: true }}
+        className="flex flex-wrap justify-center gap-6 text-sm"
+      >
+        
+      </motion.div>
+    </motion.div>
+
+    {/* Floating Elements */}
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <motion.div
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 5, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-10 left-10 w-16 h-16 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-xl"
+      />
+      <motion.div
+        animate={{
+          y: [0, 15, 0],
+          rotate: [0, -3, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+        className="absolute top-20 right-20 w-12 h-12 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-xl"
+      />
+      <motion.div
+        animate={{
+          y: [0, -10, 0],
+          x: [0, 10, 0],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+        className="absolute bottom-10 left-1/4 w-8 h-8 bg-gradient-to-r from-teal-400/20 to-cyan-400/20 rounded-full blur-lg"
+      />
+    </div>
+  </motion.div>
+</div>
+
       
               {/* Marine Navigation Module - Background Image Design */}
               <section id="marine-navigation" className="mb-24">
-                <div className="max-w-7xl mx-auto px-6">
+                <div className="max-w-8xl mx-auto px-10">
                   <motion.div 
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -571,7 +691,7 @@ export const Dashboard = () => {
       
               {/* Coastal Livelihood Module - Background Design */}
               <section id="coastal-livelihood" className="mb-24">
-                <div className="max-w-7xl mx-auto px-6">
+                <div className="max-w-8xl mx-auto px-10">
                   <motion.div 
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -648,8 +768,8 @@ export const Dashboard = () => {
               </section>
       
               {/* Marine Research Module - Background Image Design */}
-              <section id="research" className="mb-24">
-                <div className="max-w-7xl mx-auto px-6">
+              <section id="research" className="mb-2">
+                <div className="max-w-8xl mx-auto px-10">
                   <motion.div 
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -727,7 +847,157 @@ export const Dashboard = () => {
              
             </div>
 
-      
+       {/* FAQ Section - Ocean Themed */}
+        <section className="relative bg-gradient-to-b from-slate-800 to-slate-900 py-20">
+          {/* Background Elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-cyan-400/5 to-blue-500/5 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-400/5 to-purple-500/5 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="relative max-w-7xl mx-auto px-6">
+            <div className="flex flex-col lg:flex-row items-start gap-12">
+              
+              {/* Left Content */}
+              <motion.div 
+                className="flex-1 lg:pr-8"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="space-y-6">
+                  {/* Badge */}
+                  <motion.span 
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 text-cyan-400 px-6 py-3 rounded-full text-sm font-semibold backdrop-blur-sm"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    viewport={{ once: true }}
+                  >
+                    <FaQuestionCircle className="text-cyan-400" />
+                    FREQUENTLY ASKED QUESTIONS
+                  </motion.span>
+
+                  {/* Title */}
+                  <motion.h2 
+                    className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    viewport={{ once: true }}
+                  >
+                    <span className="text-white">Have a question?</span>
+                    <br />
+                    <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                      Here are some solutions
+                    </span>
+                  </motion.h2>
+
+                  {/* Description */}
+                  <motion.p 
+                    className="text-slate-300 text-lg lg:text-xl leading-relaxed max-w-lg"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    viewport={{ once: true }}
+                  >
+                    For more queries about FloatChat and ocean intelligence, feel free to reach us through our support channels.
+                  </motion.p>
+
+                  {/* Contact Button */}
+                  <motion.button
+                    className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-2xl overflow-hidden transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
+                    whileHover={{ 
+                      scale: 1.05,
+                      boxShadow: '0 20px 40px rgba(6,182,212,0.3)'
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    viewport={{ once: true }}
+                  >
+                    <span className="relative z-10">Contact Support</span>
+                    <FaArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.button>
+                </div>
+              </motion.div>
+
+              {/* Right Content - FAQ Items */}
+              <motion.div 
+                className="flex-1 w-full space-y-4"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                {faqs.map((faq, idx) => (
+                  <motion.div
+                    key={idx}
+                    className={`group border border-slate-700/50 rounded-2xl px-6 py-5 transition-all duration-300 backdrop-blur-sm ${
+                      openIndex === idx 
+                        ? 'shadow-lg bg-gradient-to-r from-cyan-500/5 to-blue-500/5 border-cyan-500/30 shadow-cyan-500/10' 
+                        : 'hover:shadow-md hover:bg-slate-800/30 hover:border-slate-600/50'
+                    }`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div
+                      className="flex justify-between items-center cursor-pointer"
+                      onClick={() => toggleFAQ(idx)}
+                    >
+                      <p className="text-lg font-medium text-white pr-4 leading-relaxed group-hover:text-cyan-100 transition-colors duration-300">
+                        {faq.question}
+                      </p>
+                      
+                      <motion.div
+                        className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          openIndex === idx 
+                            ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white' 
+                            : 'bg-slate-700/50 text-slate-400 group-hover:bg-slate-600/50 group-hover:text-slate-300'
+                        }`}
+                        animate={{ rotate: openIndex === idx ? 45 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {openIndex === idx ? (
+                          <FaTimes className="w-4 h-4" />
+                        ) : (
+                          <FaPlus className="w-4 h-4" />
+                        )}
+                      </motion.div>
+                    </div>
+                    
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: openIndex === idx ? 'auto' : 0,
+                        opacity: openIndex === idx ? 1 : 0
+                      }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      {openIndex === idx && (
+                        <motion.p 
+                          className="text-slate-300 mt-6 text-base leading-relaxed border-t border-slate-700/30 pt-6"
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.1 }}
+                        >
+                          {faq.answer}
+                        </motion.p>
+                      )}
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
       {/* Compact Professional Footer */}
 <footer id="about" className="bg-gradient-to-r from-slate-800 to-slate-900 border-t border-slate-700/50">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

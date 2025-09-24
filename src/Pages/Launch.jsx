@@ -388,7 +388,7 @@ export const Launch = () => {
                   />
                 </motion.div>
               </motion.div>
-
+    
               {/* Tagline */}
               <motion.div
                 initial={{ y: 30, opacity: 0 }}

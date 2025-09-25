@@ -332,7 +332,7 @@ export const CoastalLivelihood = () => {
                             <p className="text-white text-sm font-medium">{alert.message}</p>
                             <p className="text-slate-400 text-xs mt-1">{alert.time}</p>
                           </div>
-                        </div>
+                        </div>    
                       </motion.div>
                     );
                   })}

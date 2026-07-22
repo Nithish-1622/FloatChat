@@ -1,0 +1,35 @@
+# Core FastAPI and Web Framework
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+
+# Data Processing (using pre-built wheels)
+pandas
+numpy
+requests
+httpx
+aiofiles
+
+# Database (using binary package to avoid compilation)
+psycopg2-binary
+sqlalchemy
+
+# Vector Database
+chromadb
+sentence-transformers
+
+# LLM Integration  
+openai
+langchain
+
+# Background Tasks
+apscheduler
+
+# Data Validation
+pydantic
+pydantic-settings
+
+# Utilities
+python-dateutil
+tenacity

@@ -24,8 +24,8 @@ dist-ssr
 *.sw?
 
 # Backend specific
-Backend/
-Backend/*
+
+
 *.pyc
 __pycache__/
 *.pyo

@@ -1,0 +1,309 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "FloatChat ARGO API - Performance Tests",
+  "dateExported": "2025-09-24T23:30:00.000Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "id": "folder-perf-1",
+      "name": "Response Time Tests",
+      "containerId": "",
+      "created": "2025-09-24T23:30:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "id": "folder-perf-2", 
+      "name": "Load Tests",
+      "containerId": "",
+      "created": "2025-09-24T23:30:00.000Z",
+      "sortNum": 20000
+    },
+    {
+      "id": "folder-perf-3",
+      "name": "Concurrent Requests",
+      "containerId": "",
+      "created": "2025-09-24T23:30:00.000Z", 
+      "sortNum": 30000
+    }
+  ],
+  "requests": [
+    {
+      "id": "req-perf-1",
+      "colId": "collection-perf",
+      "containerId": "folder-perf-1",
+      "name": "Health Check - Response Time",
+      "url": "http://localhost:8000/health",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2025-09-24T23:30:00.000Z",
+      "modified": "2025-09-24T23:30:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "res-time",
+          "custom": "",
+          "action": "less-than",
+          "value": "100"
+        },
+        {
+          "type": "res-size",
+          "custom": "",
+          "action": "greater-than",
+          "value": "50"
+        }
+      ]
+    },
+    {
+      "id": "req-perf-2",
+      "colId": "collection-perf",
+      "containerId": "folder-perf-1",
+      "name": "Chat Response - Performance",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2025-09-24T23:30:00.000Z",
+      "modified": "2025-09-24T23:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"What is the ocean temperature data showing?\",\n  \"session_id\": \"perf-test-001\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "res-time",
+          "custom": "",
+          "action": "less-than",
+          "value": "500"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.response.length",
+          "action": "greater-than",
+          "value": "10"
+        }
+      ]
+    },
+    {
+      "id": "req-perf-3",
+      "colId": "collection-perf",
+      "containerId": "folder-perf-1",
+      "name": "Data Profiles - Response Time",
+      "url": "http://localhost:8000/data/profiles",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2025-09-24T23:30:00.000Z",
+      "modified": "2025-09-24T23:30:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "res-time",
+          "custom": "",
+          "action": "less-than",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.profiles.length",
+          "action": "greater-than",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "id": "req-perf-4",
+      "colId": "collection-perf",
+      "containerId": "folder-perf-2",
+      "name": "Multiple Chat Requests - Load Test",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2025-09-24T23:30:00.000Z",
+      "modified": "2025-09-24T23:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"Tell me about ARGO float {{$randomInt}}\",\n  \"session_id\": \"load-test-{{$randomInt}}\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "res-time",
+          "custom": "",
+          "action": "less-than",
+          "value": "1000"
+        }
+      ]
+    },
+    {
+      "id": "req-perf-5",
+      "colId": "collection-perf",
+      "containerId": "folder-perf-2",
+      "name": "Sequential Health Checks",
+      "url": "http://localhost:8000/health",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2025-09-24T23:30:00.000Z",
+      "modified": "2025-09-24T23:30:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "Cache-Control",
+          "value": "no-cache"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "res-time",
+          "custom": "",
+          "action": "less-than",
+          "value": "150"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.status",
+          "action": "equal",
+          "value": "healthy"
+        }
+      ]
+    },
+    {
+      "id": "req-perf-6",
+      "colId": "collection-perf",
+      "containerId": "folder-perf-3",
+      "name": "Concurrent Profile Requests",
+      "url": "http://localhost:8000/data/profiles",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2025-09-24T23:30:00.000Z",
+      "modified": "2025-09-24T23:30:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        },
+        {
+          "name": "X-Request-ID",
+          "value": "{{$randomUUID}}"
+        }
+      ],
+      "params": [
+        {
+          "name": "query",
+          "value": "test-{{$randomInt}}",
+          "isPath": false
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "res-time",
+          "custom": "",
+          "action": "less-than",
+          "value": "300"
+        }
+      ]
+    },
+    {
+      "id": "req-perf-7",
+      "colId": "collection-perf",
+      "containerId": "folder-perf-3",
+      "name": "Mixed Endpoint Load Test",
+      "url": "http://localhost:8000/admin/stats",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2025-09-24T23:30:00.000Z",
+      "modified": "2025-09-24T23:30:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "res-time",
+          "custom": "",
+          "action": "less-than",
+          "value": "250"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.profiles_count",
+          "action": "istype",
+          "value": "number"
+        }
+      ]
+    }
+  ]
+}

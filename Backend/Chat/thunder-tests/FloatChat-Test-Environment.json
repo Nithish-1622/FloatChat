@@ -1,0 +1,68 @@
+{
+  "client": "Thunder Client",
+  "environmentName": "FloatChat ARGO API - Test Environment",
+  "dateExported": "2025-09-24T23:40:00.000Z",
+  "version": "1.0",
+  "variables": [
+    {
+      "name": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "name": "api_version", 
+      "value": "v1"
+    },
+    {
+      "name": "test_session_prefix",
+      "value": "thunder-test"
+    },
+    {
+      "name": "test_float_id",
+      "value": "1234567"
+    },
+    {
+      "name": "test_timeout",
+      "value": "5000"
+    },
+    {
+      "name": "max_response_time",
+      "value": "1000"
+    },
+    {
+      "name": "test_user_agent",
+      "value": "Thunder Client API Tests v1.0"
+    },
+    {
+      "name": "content_type_json",
+      "value": "application/json"
+    },
+    {
+      "name": "test_temperature_query",
+      "value": "What is the temperature profile data?"
+    },
+    {
+      "name": "test_salinity_query", 
+      "value": "Show me salinity measurements"
+    },
+    {
+      "name": "test_general_query",
+      "value": "Help me understand ARGO data"
+    },
+    {
+      "name": "test_profile_query",
+      "value": "temperature > 20"
+    },
+    {
+      "name": "performance_threshold_fast",
+      "value": "100"
+    },
+    {
+      "name": "performance_threshold_medium",
+      "value": "500"
+    },
+    {
+      "name": "performance_threshold_slow",
+      "value": "1000"
+    }
+  ]
+}

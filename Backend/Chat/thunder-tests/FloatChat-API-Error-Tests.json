@@ -1,0 +1,265 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "FloatChat ARGO API - Error Handling Tests",
+  "dateExported": "2025-09-24T23:25:00.000Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "id": "folder-error-1",
+      "name": "Input Validation",
+      "containerId": "",
+      "created": "2025-09-24T23:25:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "id": "folder-error-2", 
+      "name": "Not Found Scenarios",
+      "containerId": "",
+      "created": "2025-09-24T23:25:00.000Z",
+      "sortNum": 20000
+    },
+    {
+      "id": "folder-error-3",
+      "name": "Method Validation",
+      "containerId": "",
+      "created": "2025-09-24T23:25:00.000Z", 
+      "sortNum": 30000
+    }
+  ],
+  "requests": [
+    {
+      "id": "req-error-1",
+      "colId": "collection-error",
+      "containerId": "folder-error-1",
+      "name": "POST Chat - Empty Message",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2025-09-24T23:25:00.000Z",
+      "modified": "2025-09-24T23:25:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "422"
+        }
+      ]
+    },
+    {
+      "id": "req-error-2",
+      "colId": "collection-error",
+      "containerId": "folder-error-1",
+      "name": "POST Chat - Missing Message Field",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2025-09-24T23:25:00.000Z",
+      "modified": "2025-09-24T23:25:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"session_id\": \"test-session\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "422"
+        }
+      ]
+    },
+    {
+      "id": "req-error-3",
+      "colId": "collection-error",
+      "containerId": "folder-error-1",
+      "name": "POST Chat - Invalid JSON",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2025-09-24T23:25:00.000Z",
+      "modified": "2025-09-24T23:25:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"test\",\n  \"invalid\": json\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "422"
+        }
+      ]
+    },
+    {
+      "id": "req-error-4",
+      "colId": "collection-error",
+      "containerId": "folder-error-2",
+      "name": "GET Non-existent Float",
+      "url": "http://localhost:8000/data/floats/9999999",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2025-09-24T23:25:00.000Z",
+      "modified": "2025-09-24T23:25:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.float_id",
+          "action": "equal",
+          "value": "9999999"
+        }
+      ]
+    },
+    {
+      "id": "req-error-5",
+      "colId": "collection-error",
+      "containerId": "folder-error-2",
+      "name": "GET Non-existent Endpoint",
+      "url": "http://localhost:8000/api/nonexistent",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2025-09-24T23:25:00.000Z",
+      "modified": "2025-09-24T23:25:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "404"
+        }
+      ]
+    },
+    {
+      "id": "req-error-6",
+      "colId": "collection-error",
+      "containerId": "folder-error-3",
+      "name": "PUT Method on GET Endpoint",
+      "url": "http://localhost:8000/health",
+      "method": "PUT",
+      "sortNum": 60000,
+      "created": "2025-09-24T23:25:00.000Z",
+      "modified": "2025-09-24T23:25:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "405"
+        }
+      ]
+    },
+    {
+      "id": "req-error-7",
+      "colId": "collection-error",
+      "containerId": "folder-error-3",
+      "name": "DELETE Method on Chat Endpoint",
+      "url": "http://localhost:8000/chat",
+      "method": "DELETE",
+      "sortNum": 70000,
+      "created": "2025-09-24T23:25:00.000Z",
+      "modified": "2025-09-24T23:25:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "405"
+        }
+      ]
+    },
+    {
+      "id": "req-error-8",
+      "colId": "collection-error",
+      "containerId": "folder-error-1",
+      "name": "POST Chat - Wrong Content Type",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 80000,
+      "created": "2025-09-24T23:25:00.000Z",
+      "modified": "2025-09-24T23:25:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "text/plain"
+        }
+      ],
+      "body": {
+        "type": "raw",
+        "raw": "message=hello",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "422"
+        }
+      ]
+    }
+  ]
+}

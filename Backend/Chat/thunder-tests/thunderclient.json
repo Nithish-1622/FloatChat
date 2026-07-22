@@ -1,0 +1,193 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "FloatChat ARGO API",
+    "dateExported": "2025-09-26T12:30:00.000Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "id": "req_1",
+            "colId": "collection_floatchat_argo",
+            "name": "Health Check",
+            "url": "http://localhost:8000/health",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "id": "req_2", 
+            "colId": "collection_floatchat_argo",
+            "name": "API Root Info",
+            "url": "http://localhost:8000/",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "id": "req_3",
+            "colId": "collection_floatchat_argo", 
+            "name": "Get ARGO Data Summary",
+            "url": "http://localhost:8000/argo/summary",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "id": "req_4",
+            "colId": "collection_floatchat_argo",
+            "name": "Query ARGO Data - All Regions",
+            "url": "http://localhost:8000/argo/data",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"max_results\": 5\n}"
+            },
+            "tests": []
+        },
+        {
+            "id": "req_5",
+            "colId": "collection_floatchat_argo",
+            "name": "Query ARGO Data - Arabian Sea",
+            "url": "http://localhost:8000/argo/data", 
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"region\": \"Arabian_Sea\",\n  \"max_results\": 5\n}"
+            },
+            "tests": []
+        },
+        {
+            "id": "req_6",
+            "colId": "collection_floatchat_argo",
+            "name": "Chat - Arabian Sea Temperature",
+            "url": "http://localhost:8000/chat",
+            "method": "POST", 
+            "sortNum": 60000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\": \"What are the temperature conditions in the Arabian Sea?\",\n  \"include_data\": true,\n  \"max_profiles\": 5\n}"
+            },
+            "tests": []
+        },
+        {
+            "id": "req_7",
+            "colId": "collection_floatchat_argo",
+            "name": "Chat - Bay of Bengal Salinity",
+            "url": "http://localhost:8000/chat",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [
+                {
+                    "name": "Content-Type", 
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\": \"How does salinity vary in the Bay of Bengal compared to the Arabian Sea?\",\n  \"include_data\": true,\n  \"max_profiles\": 3\n}"
+            },
+            "tests": []
+        },
+        {
+            "id": "req_8", 
+            "colId": "collection_floatchat_argo",
+            "name": "Chat - Depth Profile Analysis",
+            "url": "http://localhost:8000/chat",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json", 
+                "raw": "{\n  \"message\": \"Explain the thermocline structure in the Central Indian Ocean\",\n  \"include_data\": true,\n  \"max_profiles\": 4\n}"
+            },
+            "tests": []
+        },
+        {
+            "id": "req_9",
+            "colId": "collection_floatchat_argo", 
+            "name": "Chat - Regional Comparison",
+            "url": "http://localhost:8000/chat",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\": \"Compare the oceanographic conditions between all Indian Ocean regions\",\n  \"include_data\": true,\n  \"max_profiles\": 8\n}"
+            },
+            "tests": []
+        },
+        {
+            "id": "req_10",
+            "colId": "collection_floatchat_argo",
+            "name": "Get Sample Queries",
+            "url": "http://localhost:8000/test/sample-queries",
+            "method": "GET",
+            "sortNum": 100000, 
+            "created": "2025-09-26T12:30:00.000Z",
+            "modified": "2025-09-26T12:30:00.000Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

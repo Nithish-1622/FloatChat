@@ -1,0 +1,390 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "FloatChat ARGO API - Integration Tests", 
+  "dateExported": "2025-09-24T23:35:00.000Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "id": "folder-int-1",
+      "name": "End-to-End Workflows",
+      "containerId": "",
+      "created": "2025-09-24T23:35:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "id": "folder-int-2", 
+      "name": "Data Flow Tests",
+      "containerId": "",
+      "created": "2025-09-24T23:35:00.000Z",
+      "sortNum": 20000
+    },
+    {
+      "id": "folder-int-3",
+      "name": "Session Management",
+      "containerId": "",
+      "created": "2025-09-24T23:35:00.000Z", 
+      "sortNum": 30000
+    }
+  ],
+  "requests": [
+    {
+      "id": "req-int-1",
+      "colId": "collection-int",
+      "containerId": "folder-int-1",
+      "name": "Complete Chat Workflow",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"What ARGO floats are available?\",\n  \"session_id\": \"integration-test-001\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.response",
+          "action": "istype",
+          "value": "string"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.session_id",
+          "action": "equal",
+          "value": "integration-test-001"
+        },
+        {
+          "type": "set-var",
+          "custom": "session_id",
+          "value": "json.session_id"
+        }
+      ]
+    },
+    {
+      "id": "req-int-2",
+      "colId": "collection-int",
+      "containerId": "folder-int-1",
+      "name": "Follow-up Question in Same Session",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"Tell me more about float 1234567\",\n  \"session_id\": \"{{session_id}}\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.session_id",
+          "action": "equal",
+          "value": "{{session_id}}"
+        }
+      ]
+    },
+    {
+      "id": "req-int-3",
+      "colId": "collection-int",
+      "containerId": "folder-int-2",
+      "name": "Data Discovery Flow - Step 1: Get All Floats",
+      "url": "http://localhost:8000/data/floats",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.floats.length",
+          "action": "greater-than",
+          "value": "0"
+        },
+        {
+          "type": "set-var",
+          "custom": "first_float_id",
+          "value": "json.floats[0]"
+        }
+      ]
+    },
+    {
+      "id": "req-int-4",
+      "colId": "collection-int",
+      "containerId": "folder-int-2",
+      "name": "Data Discovery Flow - Step 2: Get Float Details",
+      "url": "http://localhost:8000/data/floats/{{first_float_id}}",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.float_id",
+          "action": "equal",
+          "value": "{{first_float_id}}"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.location.lat",
+          "action": "istype",
+          "value": "number"
+        }
+      ]
+    },
+    {
+      "id": "req-int-5",
+      "colId": "collection-int",
+      "containerId": "folder-int-2",
+      "name": "Data Discovery Flow - Step 3: Get Related Profiles",
+      "url": "http://localhost:8000/data/profiles",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [
+        {
+          "name": "query",
+          "value": "float_id={{first_float_id}}",
+          "isPath": false
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.profiles",
+          "action": "istype",
+          "value": "array"
+        }
+      ]
+    },
+    {
+      "id": "req-int-6",
+      "colId": "collection-int",
+      "containerId": "folder-int-3",
+      "name": "Session Test - New Session Auto-Generation",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 60000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"Start a new conversation about salinity\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.session_id",
+          "action": "istype",
+          "value": "string"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.session_id.length",
+          "action": "greater-than",
+          "value": "10"
+        },
+        {
+          "type": "set-var",
+          "custom": "new_session_id",
+          "value": "json.session_id"
+        }
+      ]
+    },
+    {
+      "id": "req-int-7",
+      "colId": "collection-int",
+      "containerId": "folder-int-3",
+      "name": "Session Test - Continue with Generated Session",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 70000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"Continue the conversation about salinity measurements\",\n  \"session_id\": \"{{new_session_id}}\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.session_id",
+          "action": "equal",
+          "value": "{{new_session_id}}"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.response",
+          "action": "contains",
+          "value": "salinity"
+        }
+      ]
+    },
+    {
+      "id": "req-int-8",
+      "colId": "collection-int",
+      "containerId": "folder-int-1",
+      "name": "System Status Check Workflow",
+      "url": "http://localhost:8000/health",
+      "method": "GET",
+      "sortNum": 80000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.status",
+          "action": "equal",
+          "value": "healthy"
+        },
+        {
+          "type": "set-var",
+          "custom": "system_status",
+          "value": "json.status"
+        }
+      ]
+    },
+    {
+      "id": "req-int-9",
+      "colId": "collection-int",
+      "containerId": "folder-int-1",
+      "name": "Admin Stats After Health Check",
+      "url": "http://localhost:8000/admin/stats",
+      "method": "GET",
+      "sortNum": 90000,
+      "created": "2025-09-24T23:35:00.000Z",
+      "modified": "2025-09-24T23:35:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.uptime",
+          "action": "equal",
+          "value": "Running"
+        }
+      ],
+      "note": "This test runs after health check to verify system consistency"
+    }
+  ]
+}

@@ -1,0 +1,501 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "FloatChat ARGO API - Core Tests",
+  "dateExported": "2025-09-24T23:20:00.000Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "id": "folder-1",
+      "name": "Health & Status",
+      "containerId": "",
+      "created": "2025-09-24T23:20:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "id": "folder-2", 
+      "name": "Chat Interface",
+      "containerId": "",
+      "created": "2025-09-24T23:20:00.000Z",
+      "sortNum": 20000
+    },
+    {
+      "id": "folder-3",
+      "name": "Data Endpoints",
+      "containerId": "",
+      "created": "2025-09-24T23:20:00.000Z", 
+      "sortNum": 30000
+    },
+    {
+      "id": "folder-4",
+      "name": "Admin Functions",
+      "containerId": "",
+      "created": "2025-09-24T23:20:00.000Z",
+      "sortNum": 40000
+    }
+  ],
+  "requests": [
+    {
+      "id": "req-1",
+      "colId": "collection-1",
+      "containerId": "folder-1",
+      "name": "GET Root - API Status",
+      "url": "http://localhost:8000/",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.message",
+          "action": "contains",
+          "value": "FloatChat ARGO API is running"
+        },
+        {
+          "type": "json-query", 
+          "custom": "json.status",
+          "action": "equal",
+          "value": "active"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.version",
+          "action": "equal", 
+          "value": "1.0.0"
+        }
+      ]
+    },
+    {
+      "id": "req-2",
+      "colId": "collection-1", 
+      "containerId": "folder-1",
+      "name": "GET Health Check",
+      "url": "http://localhost:8000/health",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.status",
+          "action": "equal",
+          "value": "healthy"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.services.api.status",
+          "action": "equal",
+          "value": "active"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.services.data_service.status", 
+          "action": "equal",
+          "value": "active"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.services.ai_service.status",
+          "action": "equal",
+          "value": "active"
+        },
+        {
+          "type": "res-time",
+          "custom": "",
+          "action": "less-than",
+          "value": "1000"
+        }
+      ]
+    },
+    {
+      "id": "req-3",
+      "colId": "collection-1",
+      "containerId": "folder-2", 
+      "name": "POST Chat - Temperature Query",
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"What is the temperature data?\",\n  \"session_id\": \"test-session-001\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.response",
+          "action": "contains",
+          "value": "temperature"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.session_id",
+          "action": "equal",
+          "value": "test-session-001"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.timestamp",
+          "action": "istype",
+          "value": "string"
+        }
+      ]
+    },
+    {
+      "id": "req-4",
+      "colId": "collection-1",
+      "containerId": "folder-2",
+      "name": "POST Chat - Salinity Query", 
+      "url": "http://localhost:8000/chat",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Accept", 
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"Tell me about salinity measurements\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.response",
+          "action": "contains",
+          "value": "salinity"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.session_id",
+          "action": "istype",
+          "value": "string"
+        }
+      ]
+    },
+    {
+      "id": "req-5",
+      "colId": "collection-1",
+      "containerId": "folder-2",
+      "name": "POST Chat - General Query",
+      "url": "http://localhost:8000/chat",
+      "method": "POST", 
+      "sortNum": 50000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"message\": \"Hello, how can you help me?\"\n}",
+        "form": []
+      },
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.response",
+          "action": "contains",
+          "value": "ARGO"
+        }
+      ]
+    },
+    {
+      "id": "req-6",
+      "colId": "collection-1",
+      "containerId": "folder-3",
+      "name": "GET All Profiles",
+      "url": "http://localhost:8000/data/profiles",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2025-09-24T23:20:00.000Z", 
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.profiles",
+          "action": "istype",
+          "value": "array"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.count",
+          "action": "istype",
+          "value": "number"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.profiles[0].id",
+          "action": "equal",
+          "value": "profile_001"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.profiles[0].float_id",
+          "action": "equal",
+          "value": "1234567"
+        }
+      ]
+    },
+    {
+      "id": "req-7",
+      "colId": "collection-1",
+      "containerId": "folder-3",
+      "name": "GET Profiles with Query",
+      "url": "http://localhost:8000/data/profiles",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [
+        {
+          "name": "query",
+          "value": "temperature > 20",
+          "isPath": false
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.profiles",
+          "action": "istype",
+          "value": "array"
+        }
+      ]
+    },
+    {
+      "id": "req-8",
+      "colId": "collection-1",
+      "containerId": "folder-3",
+      "name": "GET All Floats",
+      "url": "http://localhost:8000/data/floats",
+      "method": "GET",
+      "sortNum": 80000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal", 
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.floats",
+          "action": "istype",
+          "value": "array"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.count", 
+          "action": "equal",
+          "value": "3"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.floats",
+          "action": "contains",
+          "value": "1234567"
+        }
+      ]
+    },
+    {
+      "id": "req-9",
+      "colId": "collection-1",
+      "containerId": "folder-3",
+      "name": "GET Specific Float Info",
+      "url": "http://localhost:8000/data/floats/1234567",
+      "method": "GET",
+      "sortNum": 90000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.float_id",
+          "action": "equal",
+          "value": "1234567"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.status",
+          "action": "equal",
+          "value": "active"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.location.lat",
+          "action": "istype",
+          "value": "number"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.location.lon",
+          "action": "istype",
+          "value": "number"
+        }
+      ]
+    },
+    {
+      "id": "req-10",
+      "colId": "collection-1",
+      "containerId": "folder-4",
+      "name": "GET System Statistics",
+      "url": "http://localhost:8000/admin/stats",
+      "method": "GET",
+      "sortNum": 100000,
+      "created": "2025-09-24T23:20:00.000Z",
+      "modified": "2025-09-24T23:20:00.000Z",
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.profiles_count",
+          "action": "istype",
+          "value": "number"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.floats_count",
+          "action": "istype",
+          "value": "number"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.uptime",
+          "action": "equal",
+          "value": "Running"
+        }
+      ]
+    }
+  ]
+}
